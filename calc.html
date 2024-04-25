@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <form action="/action_page.php">
+      Select a route:
+      <select id="route" name="route">
+        <option value="EyeEar">Ophthalmic/Otic</option>
+        <option value="Nose">Intranasal</option>
+        <option value="Inj">Injection</option>
+      </select>
+      <div id="ifEyeEar" style="display:block">
+        Enter Total Drops per Day<input type="text" id="myText" >drops
+        <br>Note: Account for one or both eyes/ears in total drops per day
+      </div>
+      <div id="ifNose" style="display:none">Select an intranasal drug:
+        <select id="noseDrugs" name="noseDrugs">
+          <option value="ipra3">Ipratropium 0.03% (30 mL)</option>
+          <option value="ipra6">Ipratropium 0.06% (15 mL)</option>
+          <option value="flut">Fluticasone (16g)</option>
+        </select>
+      </div>
+      <div id="ifInj" style="display:none">Select an injectable drug:
+        <select id="injDrugs" name="injDrugs">
+          <option value="u100pen">U-100 insulin PEN (3 mL)</option>
+          <option value="u200pen">U-200 insulin PEN (3 mL)</option>
+          <option value="u100vial">U-100 insulin VIAL (3 mL or 10 mL)</option>
+          <option value="toujeo">Toujeo (1.5 mL)</option>
+          <option value="toujeomax">Toujeo Max (3 mL)</option>
+          <option value="ozempic0">Ozempic 0.25mg or 0.5mg (3 mL)</option>
+          <option value="ozempic1">Ozempic 1mg/2mg (3 mL)</option>
+        </select>
+      </div>
+      <br>
+      <br><input type="submit" value="Calculate">
+    <script>
+      const routeInput = document.getElementById('route');
+      routeInput.addEventListener('input', function() {
+        if (routeInput.value === 'EyeEar') {
+          document.getElementById('ifEyeEar').style.display = 'block';
+          document.getElementById('ifNose').style.display = 'none';
+          document.getElementById('ifInj').style.display = 'none';
+        } else if (routeInput.value === 'Nose') {
+          document.getElementById('ifEyeEar').style.display = 'none';
+          document.getElementById('ifNose').style.display = 'block';
+          document.getElementById('ifInj').style.display = 'none';
+        } else if (routeInput.value === 'Inj') {
+          document.getElementById('ifEyeEar').style.display = 'none';
+          document.getElementById('ifNose').style.display = 'none';
+          document.getElementById('ifInj').style.display = 'block';
+        } else {
+          document.getElementById('ifEyeEar').style.display = 'none';
+          document.getElementById('ifNose').style.display = 'none';
+          document.getElementById('ifInj').style.display = 'none';
+        }
+      });
+    </script>
+    </form>
+
+  </body>
+</html>
