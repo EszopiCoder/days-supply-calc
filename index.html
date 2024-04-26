@@ -4,36 +4,61 @@
   </head>
   <body>
     <form action="/action_page.php">
-      Select a route:
+      Select Route:
       <select id="route" name="route">
         <option value="EyeEar">Ophthalmic/Otic</option>
         <option value="Nose">Intranasal</option>
         <option value="Inj">Injection</option>
       </select>
       <div id="ifEyeEar" style="display:block">
-        Enter Total Drops per Day<input type="text" id="myText" >drops
+        Select Ophthalmic/Otic Drug:
+        <select id="eyeEarDrugs" name="eyeEarDrugs">
+          <option value="other">Other</option>
+          <option value="lotemaxsm">LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]</option>
+        </select>
+        <div id="ifEyeEarML" style="display:block">
+          Enter Package Size (mL):<input type="text" id="EyeEarML">
+        </div>
+        <div id="ifEyeEarPkg" style="display:none">
+          Enter # of Packages:<input type="text" id="EyeEarPkg" value="1">
+        </div>
+        Enter Total Drops per Day:<input type="text" id="EyeEarGtt">
         <br>Note: Account for one or both eyes/ears in total drops per day
       </div>
-      <div id="ifNose" style="display:none">Select an intranasal drug:
+      <div id="ifNose" style="display:none">Select Intranasal Drug:
         <select id="noseDrugs" name="noseDrugs">
-          <option value="ipra3">Ipratropium 0.03% (30 mL)</option>
-          <option value="ipra6">Ipratropium 0.06% (15 mL)</option>
-          <option value="flut">Fluticasone (16g)</option>
+          <option value="flut50">FLONASE 50 mcg (16g) [fluticasone]</option>
+          <option value="ipra3">ipratropium 0.03% (30 mL)</option>
+          <option value="ipra6">ipratropium 0.06% (15 mL)</option>
         </select>
+        <br>Enter # of Packages:<input type="text" id="NosePkg" value="1">
+        <br>Enter Total Sprays per Day:<input type="text" id="NoseSpray">
+        <br>Note: Account for one or both nostrils in total sprays per day
       </div>
-      <div id="ifInj" style="display:none">Select an injectable drug:
+      <div id="ifInj" style="display:none">Select Injectable Drug:
         <select id="injDrugs" name="injDrugs">
           <option value="u100pen">U-100 insulin PEN (3 mL)</option>
-          <option value="u200pen">U-200 insulin PEN (3 mL)</option>
           <option value="u100vial">U-100 insulin VIAL (3 mL or 10 mL)</option>
-          <option value="toujeo">Toujeo (1.5 mL)</option>
-          <option value="toujeomax">Toujeo Max (3 mL)</option>
-          <option value="ozempic0">Ozempic 0.25mg or 0.5mg (3 mL)</option>
-          <option value="ozempic1">Ozempic 1mg/2mg (3 mL)</option>
+          <option value="u200pen">U-200 insulin PEN (3 mL)</option>
+          <option value="toujeo">U-300 TOUJEO PEN (1.5 mL) [insulin glargine]</option>
+          <option value="toujeomax">U-300 TOUJEO MAX PEN (3 mL) [insulin glargine]</option>
+          <option value="u500pen">U-500 HUMULIN R PEN (3 mL) [insulin human]</option>
+          <option value="u500vial">U-500 HUMULIN R VIAL (20 mL) [insulin human]</option>
+          <option value="ozempic">OZEMPIC 0.25mg/1mg/2mg (3 mL) [semaglutide]</option>
         </select>
+        <div id="insulin" style="display:block">
+          Enter Package Size (mL):<input type="text" id="injML" oninput="calcPens()">
+          <br>Enter Total Units per Day:<input type="text" id="injIU">
+        </div>
+        <div id="insulinPen" style="display:block">
+          Enter # of Injections per Day:<input type="text" id="injFreq">
+          <br>Note: Exclude priming doses from total units per day
+          <p id="numPens"></p>
+        </div>
       </div>
-      <br>
-      <br><input type="submit" value="Calculate">
+      <br><input type="button" value="Calculate" onclick="calc()">
+      <p id="proof"></p>
+      <p id="output"></p>
     <script>
       const routeInput = document.getElementById('route');
       routeInput.addEventListener('input', function() {
@@ -55,6 +80,155 @@
           document.getElementById('ifInj').style.display = 'none';
         }
       });
+      const eyeEarInput = document.getElementById('eyeEarDrugs');
+      eyeEarInput.addEventListener('input', function() {
+        if (eyeEarInput.value == 'lotemaxsm' || 'miebo') {
+          document.getElementById('ifEyeEarML').style.display = 'none';
+          document.getElementById('ifEyeEarPkg').style.display = 'block';
+        } else {
+          document.getElementById('ifEyeEarML').style.display = 'block';
+          document.getElementById('ifEyeEarPkg').style.display = 'none';
+        }
+      });
+      const injInput = document.getElementById('injDrugs');
+      injInput.addEventListener('input', function() {
+        if (injInput.value == 'u100vial' || injInput.value == 'u500vial') {
+          document.getElementById('insulin').style.display = 'block';
+          document.getElementById('insulinPen').style.display = 'none';
+        } else if (injInput.value == 'u100pen' || injInput.value == 'u200pen' || injInput.value == 'toujeo' || injInput.value == 'toujeomax' || injInput.value == 'u500pen') {
+          document.getElementById('insulin').style.display = 'block';
+          document.getElementById('insulinPen').style.display = 'block';
+        } else {
+          document.getElementById('insulin').style.display = 'none';
+          document.getElementById('insulinPen').style.display = 'none';
+        }
+      })
+      function calcPens() {
+        const totalML = document.getElementById('injML');
+        //const injInput = document.getElementById('injDrugs');
+        if (isNaN(totalML.value) || totalML.value == 0) {
+            document.getElementById('numPens').innerHTML = "Invalid package size";
+        } else {
+          if (injInput.value == 'u100pen' || injInput.value == 'u200pen' || injInput.value == 'toujeomax' || injInput.value == 'u500pen') {
+            document.getElementById('numPens').innerHTML = totalML.value+" mL / 3 mL pen = "+totalML.value / 3+" pen(s)";
+          } else if (injInput.value == 'toujeo')  {
+            document.getElementById('numPens').innerHTML = totalML.value+" mL / 1.5 mL pen = "+totalML.value / 1.5+" pen(s)";
+          }
+        }
+      }
+      function calc() {
+        var proof;
+        var output;
+        document.getElementById('proof').innerHTML = '';
+        document.getElementById('output').innerHTML = '';
+        switch (document.getElementById('route').value) {
+          case 'EyeEar':
+            let totalDrops;
+            // Calculate total number of drops
+            switch (document.getElementById('eyeEarDrugs').value) {
+              case 'other':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 20 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*20;
+                break;
+              case 'lotemaxsm':
+                proof = "("+document.getElementById('EyeEarPkg').value+" pkg x 131 drops/mL)";
+                totalDrops = document.getElementById('EyeEarPkg').value*131;
+                break;
+            }
+            let dailyDrops = document.getElementById('EyeEarGtt').value;
+            // Validate inputs and calculate days supply
+            if (isNaN(totalDrops) || totalDrops < 1 || isNaN(dailyDrops) || dailyDrops < 1) {
+              document.getElementById('output').innerHTML = "Invalid input(s)"
+            } else {
+              output = Math.floor(totalDrops / dailyDrops);
+              proof = proof+" / "+dailyDrops+" drops per day =";
+              document.getElementById('proof').innerHTML = proof;
+              document.getElementById('output').innerHTML = output+" days supply";
+            }
+            break;
+          case 'Nose':
+            let totalSprays;
+            // Calculate total number of sprays
+            switch (document.getElementById('noseDrugs').value) {
+              case 'ipra3':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 345 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*345;
+                break;
+              case 'ipra6':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 165 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*165;
+                break;
+              case 'flut50':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 120 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*120;
+                break;
+            }
+            let dailySprays = document.getElementById('NoseSpray').value;
+            // Validate inputs and calculate days supply
+            if (isNaN(totalSprays) || totalSprays < 1) {
+              document.getElementById('output').innerHTML = "Invalid input(s)"
+            } else {
+              output = Math.floor(totalSprays / dailySprays);
+              proof = proof+" / "+dailySprays+" sprays per day = ";
+              document.getElementById('proof').innerHTML = proof;
+              document.getElementById('output').innerHTML = output+" days supply";
+            }
+            break;
+          case 'Inj':
+            let totalUnits;
+            // Calculate total number of units
+            switch (document.getElementById('injDrugs').value) {
+              case 'u100pen':
+              case 'u100vial':
+                proof = "("+document.getElementById('injML').value+" mL x 100 units/mL)";
+                totalUnits = document.getElementById('injML').value*100;
+                break;
+              case 'u200pen':
+                proof = "("+document.getElementById('injML').value+" mL x 200 units/mL)";
+                totalUnits = document.getElementById('injML').value*200;
+              case 'toujeo':
+              case 'toujeomax':
+                proof = "("+document.getElementById('injML').value+" mL x 300 units/mL)";
+                totalUnits = document.getElementById('injML').value*300;
+                break;
+              case 'u500pen':
+              case 'u500vial':
+                proof = "("+document.getElementById('injML').value+" mL x 500 units/mL)";
+                totalUnits = document.getElementById('injML').value*500;
+                break;
+            }
+            let dailyUnits;
+            // Calculate total daily dose (pens only)
+            switch (document.getElementById('injDrugs').value) {
+              case 'u100pen':
+              case 'u200pen':
+                proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 2 priming units)) =";
+                dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*2);
+                break;
+              case 'toujeo':
+                proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 3 priming units)) =";
+                dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*3);
+                break;
+              case 'toujeomax':
+                proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 4 priming units)) =";
+                dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*4);
+                break;
+              case 'u500pen':
+                proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 5 priming units)) =";
+                dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*5);
+                break;
+            }
+            // Validate inputs and calculate days supply
+            if (isNaN(totalUnits) || totalUnits < 1 || isNaN(dailyUnits) || dailyUnits < 1) {
+              document.getElementById('output').innerHTML = "Invalid input(s)";
+            } else {
+              output = Math.floor(totalUnits / dailyUnits);
+              document.getElementById('proof').innerHTML = proof;
+              document.getElementById('output').innerHTML = output+" days supply";
+            }
+            break;
+        }
+      }
     </script>
     </form>
 
