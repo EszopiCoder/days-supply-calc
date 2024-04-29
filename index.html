@@ -3,18 +3,41 @@
     <base target="_top">
   </head>
   <body>
+    <h1>Days Supply Calculator</h1>
+    <p>Open source and web-based (<a href="https://github.com/EszopiCoder/days-supply-calc/" target="_blank">GitHub</a>)</p>
     <form action="/action_page.php">
       Select Route:
-      <select id="route" name="route">
+      <select id="route" name="route" onchange="onchangeRoute()">
         <option value="EyeEar">Ophthalmic/Otic</option>
         <option value="Nose">Intranasal</option>
         <option value="Inj">Injection</option>
       </select>
       <div id="ifEyeEar" style="display:block">
         Select Ophthalmic/Otic Drug:
-        <select id="eyeEarDrugs" name="eyeEarDrugs">
+        <select id="eyeEarDrugs" name="eyeEarDrugs" onchange="onchangeEyeEar()">
           <option value="other">Other</option>
+          <option value="alrex">ALREX 0.2% [loteprednol etabonate]</option>
+          <option value="atropine">atropine 1%</option>
+          <option value="bepreve">BEPREVE 1.5% [bepotastine]</option>
+          <option value="besivance">BESIVANCE 0.6% [besifloxacin]</option>
+          <option value="brimonidine">brimonidine 0.2%</option>
+          <option value="bromfenac">bromfenac 0.07%</option>
+          <option value="cyclopentolate">cyclopentolate 1%</option>
+          <option value="dexamethasone">dexamethasone 0.1%</option>
+          <option value="diclofenac">diclofenac sod 0.1%</option>
+          <option value="lotemaxsusp">LOTEMAX 0.5% susp [loteprednol etabonate]</option>
+          <option value="lotemaxgel">LOTEMAX 0.5% gel (5 g) [loteprednol etabonate]</option>
           <option value="lotemaxsm">LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]</option>
+          <option value="loteprednol">loteprednol etabonate 0.2%</option>
+          <option value="lumigan">LUMIGAN 0.01% [bimatoprost]</option>
+          <option value="miebo">MIEBO 1.3 GM/mL (3 mL) [perfluorohexyloctane]</option>
+          <option value="prolensa">PROLENSA 0.07% (3 mL) [bromfenac sodium]</option>
+          <option value="timoptic">TIMOPTIC [timolol maleate]</option>
+          <option value="timopticxe">TIMOPTIC XE (5 mL) [timolol maleate gel forming]</option>
+          <option value="vyzulta">VYZULTA 0.024% [latanoprostene bunod]</option>
+          <option value="xalatan">XALATAN 0.005% (2.5 mL) [latanoprost]</option>
+          <option value="zirgan">ZIRGAN 0.15% (5 g) [ganciclovir]</option>
+          <option value="zylet">ZYLET 0.5% / 0.3% [loteprednol etabonate / tobramycin]</option>
         </select>
         <div id="ifEyeEarML" style="display:block">
           Enter Package Size (mL):<input type="text" id="EyeEarML">
@@ -27,16 +50,23 @@
       </div>
       <div id="ifNose" style="display:none">Select Intranasal Drug:
         <select id="noseDrugs" name="noseDrugs">
+          <option value="azelastine">azelastine 0.1% (30 mL)</option>
+          <option value="butorphanol">butorphanol 10 mg/mL (2.5 mL)</option>
+          <option value="calcitonin">calcitonin salmon 220 USP (3.7 mL)</option>
+          <option value="dymista">DYMISTA 137 mcg / 50 mcg (23 g) [azelastine / fluticasone]</option>
           <option value="flut50">FLONASE 50 mcg (16g) [fluticasone]</option>
           <option value="ipra3">ipratropium 0.03% (30 mL)</option>
           <option value="ipra6">ipratropium 0.06% (15 mL)</option>
+          <option value="ryaltris">RYALTRIS 665 mcg / 25 mcg (29 g) [olopatadine / mometasone]</option>
+          <option value="omnaris">OMNARIS 50 mcg (12.5 g) [ciclesonide]</option>
+          <option value="zetonna">ZETONNA 37 mcg (6.1 g) [ciclesonide]</option>
         </select>
         <br>Enter # of Packages:<input type="text" id="NosePkg" value="1">
         <br>Enter Total Sprays per Day:<input type="text" id="NoseSpray">
         <br>Note: Account for one or both nostrils in total sprays per day
       </div>
       <div id="ifInj" style="display:none">Select Injectable Drug:
-        <select id="injDrugs" name="injDrugs">
+        <select id="injDrugs" name="injDrugs" onchange="onchangeInj()">
           <option value="u100pen">U-100 insulin PEN (3 mL)</option>
           <option value="u100vial">U-100 insulin VIAL (3 mL or 10 mL)</option>
           <option value="u200pen">U-200 insulin PEN (3 mL)</option>
@@ -44,7 +74,7 @@
           <option value="toujeomax">U-300 TOUJEO MAX PEN (3 mL) [insulin glargine]</option>
           <option value="u500pen">U-500 HUMULIN R PEN (3 mL) [insulin human]</option>
           <option value="u500vial">U-500 HUMULIN R VIAL (20 mL) [insulin human]</option>
-          <option value="ozempic">OZEMPIC 0.25mg/1mg/2mg (3 mL) [semaglutide]</option>
+          <option value="ozempic">OZEMPIC (3 mL) [semaglutide]</option>
         </select>
         <div id="insulin" style="display:block">
           Enter Package Size (mL):<input type="text" id="injML" oninput="calcPens()">
@@ -59,9 +89,10 @@
       <br><input type="button" value="Calculate" onclick="calc()">
       <p id="proof"></p>
       <p id="output"></p>
+      <p id="notes"></p>
     <script>
-      const routeInput = document.getElementById('route');
-      routeInput.addEventListener('input', function() {
+      function onchangeRoute() {
+        const routeInput = document.getElementById('route');
         if (routeInput.value === 'EyeEar') {
           document.getElementById('ifEyeEar').style.display = 'block';
           document.getElementById('ifNose').style.display = 'none';
@@ -79,19 +110,19 @@
           document.getElementById('ifNose').style.display = 'none';
           document.getElementById('ifInj').style.display = 'none';
         }
-      });
-      const eyeEarInput = document.getElementById('eyeEarDrugs');
-      eyeEarInput.addEventListener('input', function() {
-        if (eyeEarInput.value == 'lotemaxsm' || 'miebo') {
+      }
+      function onchangeEyeEar() {
+        const eyeEarInput = document.getElementById('eyeEarDrugs');
+        if (eyeEarInput.value == 'lotemaxsm' || eyeEarInput.value == 'miebo') {
           document.getElementById('ifEyeEarML').style.display = 'none';
           document.getElementById('ifEyeEarPkg').style.display = 'block';
         } else {
           document.getElementById('ifEyeEarML').style.display = 'block';
           document.getElementById('ifEyeEarPkg').style.display = 'none';
         }
-      });
-      const injInput = document.getElementById('injDrugs');
-      injInput.addEventListener('input', function() {
+      }
+      function onchangeInj() {
+        const injInput = document.getElementById('injDrugs');
         if (injInput.value == 'u100vial' || injInput.value == 'u500vial') {
           document.getElementById('insulin').style.display = 'block';
           document.getElementById('insulinPen').style.display = 'none';
@@ -102,10 +133,10 @@
           document.getElementById('insulin').style.display = 'none';
           document.getElementById('insulinPen').style.display = 'none';
         }
-      })
+      }
       function calcPens() {
         const totalML = document.getElementById('injML');
-        //const injInput = document.getElementById('injDrugs');
+        const injInput = document.getElementById('injDrugs');
         if (isNaN(totalML.value) || totalML.value == 0) {
             document.getElementById('numPens').innerHTML = "Invalid package size";
         } else {
@@ -119,8 +150,10 @@
       function calc() {
         var proof;
         var output;
+        var notes;
         document.getElementById('proof').innerHTML = '';
         document.getElementById('output').innerHTML = '';
+        document.getElementById('notes').innerHTML = '';
         switch (document.getElementById('route').value) {
           case 'EyeEar':
             let totalDrops;
@@ -129,6 +162,59 @@
               case 'other':
                 proof = "("+document.getElementById('EyeEarML').value+" mL x 20 drops/mL)";
                 totalDrops = document.getElementById('EyeEarML').value*20;
+                break;
+              case 'bepreve':
+              case 'xalatan':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 33 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*33;
+                break;
+              case 'alrex':
+              case 'timoptic':
+              case 'vyzulta':
+              case 'zylet':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 32 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*32;
+                break;
+              case 'atropine':
+              case 'besivance':
+              case 'cyclopentolate':
+              case 'dexamethasone':
+              case 'lotemaxsusp':
+              case 'loteprednol':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 31 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*31;
+                break;
+              case 'brimonidine':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 30 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*30;
+                break;
+              case 'timopticxe':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 29 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*29;
+                break;
+              case 'zirgan':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 27 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*27;
+                break;
+              case 'lotemaxgel':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 25 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*25;
+                break;
+              case 'lumigan':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 24 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*24;
+                break;
+              case 'bromfenac':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 21 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*21;
+                break;
+              case 'prolensa':
+                proof = "("+document.getElementById('EyeEarML').value+" mL x 19 drops/mL)";
+                totalDrops = document.getElementById('EyeEarML').value*19;
+                break;
+              case 'miebo':
+                proof = "("+document.getElementById('EyeEarPkg').value+" pkg x 272 drops/mL)";
+                totalDrops = document.getElementById('EyeEarPkg').value*272;
                 break;
               case 'lotemaxsm':
                 proof = "("+document.getElementById('EyeEarPkg').value+" pkg x 131 drops/mL)";
@@ -154,13 +240,35 @@
                 proof = "("+document.getElementById('NosePkg').value+" pkg x 345 sprays/pkg)";
                 totalSprays = document.getElementById('NosePkg').value*345;
                 break;
+              case 'ryaltris':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 240 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*240;
+                break;
+              case 'azelastine':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 200 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*200;
+                break;
               case 'ipra6':
                 proof = "("+document.getElementById('NosePkg').value+" pkg x 165 sprays/pkg)";
                 totalSprays = document.getElementById('NosePkg').value*165;
                 break;
+              case 'dymista':
               case 'flut50':
+              case 'omnaris':
                 proof = "("+document.getElementById('NosePkg').value+" pkg x 120 sprays/pkg)";
                 totalSprays = document.getElementById('NosePkg').value*120;
+                break;
+              case 'zetonna':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 60 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*60;
+                break;
+              case 'calcitonin':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 30 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*30;
+                break;
+              case 'butorphanol':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 14 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*14;
                 break;
             }
             let dailySprays = document.getElementById('NoseSpray').value;
@@ -204,33 +312,45 @@
               case 'u200pen':
                 proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 2 priming units)) =";
                 dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*2);
+                notes = "Check room temperature stability of drug if over 28 days supply<br>Mixed insulins have shorter stability at 10-14 days supply";
                 break;
               case 'toujeo':
                 proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 3 priming units)) =";
                 dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*3);
+                notes = "Check room temperature stability of drug if over 56 days supply";
                 break;
               case 'toujeomax':
                 proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 4 priming units)) =";
                 dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*4);
+                notes = "Check room temperature stability of drug if over 56 days supply";
                 break;
               case 'u500pen':
                 proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 5 priming units)) =";
                 dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*5);
+                notes = "Check room temperature stability of drug if over 28 days supply";
+                break;
+              case 'ozempic':
+                totalUnits = 169413001;
+                dailyUnits = 1;
+                proof = "<table><tr><th>Strength</th><th>Directions</th><th>Days Supply</th></tr><tr><td>0.25 mg or 0.5 mg</td><td>Inject 0.25 mg once weekly</td><td>56 days</td></tr><tr><td>0.25 mg or 0.5 mg</td><td>Inject 0.25 mg once weekly for 4 weeks, 0.5 mg once weekly for 2 weeks</td><td>42 days supply</td></tr><tr><td>0.25 mg or 0.5 mg</td><td>Inject 0.5 mg once weekly</td><td>28 days supply</td></tr><tr><td>1 mg</td><td>Inject 1 mg once weekly</td><td>28 days supply</td></tr><tr><td>2 mg</td><td>Inject 2 mg once weekly</td><td>28 days supply</td></tr></table>";
+                notes = "";
                 break;
             }
             // Validate inputs and calculate days supply
             if (isNaN(totalUnits) || totalUnits < 1 || isNaN(dailyUnits) || dailyUnits < 1) {
               document.getElementById('output').innerHTML = "Invalid input(s)";
+            } else if (totalUnits == 169413001) {
+              document.getElementById('proof').innerHTML = proof;
             } else {
               output = Math.floor(totalUnits / dailyUnits);
               document.getElementById('proof').innerHTML = proof;
               document.getElementById('output').innerHTML = output+" days supply";
+              document.getElementById('notes').innerHTML = notes;
             }
             break;
         }
       }
     </script>
     </form>
-
   </body>
 </html>
