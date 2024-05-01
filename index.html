@@ -21,14 +21,16 @@
           <option value="bepreve">BEPREVE 1.5% [bepotastine]</option>
           <option value="besivance">BESIVANCE 0.6% [besifloxacin]</option>
           <option value="brimonidine">brimonidine 0.2%</option>
-          <option value="bromfenac">bromfenac 0.07%</option>
           <option value="cyclopentolate">cyclopentolate 1%</option>
           <option value="dexamethasone">dexamethasone 0.1%</option>
           <option value="diclofenac">diclofenac sod 0.1%</option>
+          <option value="dorzolamide">dorzolamide sod 2%</option>
+          <option value="cosopt">COSOPT 2% / 0.5% [dorzolamide sod / timolol maleate]</option>
+          <option value="istalol">ISTALOL 0.5% [timolol maleate]</option>
+          <option value="levobunolol">levobunolol 0.5%</option>
           <option value="lotemaxsusp">LOTEMAX 0.5% susp [loteprednol etabonate]</option>
           <option value="lotemaxgel">LOTEMAX 0.5% gel (5 g) [loteprednol etabonate]</option>
           <option value="lotemaxsm">LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]</option>
-          <option value="loteprednol">loteprednol etabonate 0.2%</option>
           <option value="lumigan">LUMIGAN 0.01% [bimatoprost]</option>
           <option value="miebo">MIEBO 1.3 GM/mL (3 mL) [perfluorohexyloctane]</option>
           <option value="prolensa">PROLENSA 0.07% (3 mL) [bromfenac sodium]</option>
@@ -53,6 +55,7 @@
           <option value="azelastine">azelastine 0.1% (30 mL)</option>
           <option value="butorphanol">butorphanol 10 mg/mL (2.5 mL)</option>
           <option value="calcitonin">calcitonin salmon 220 USP (3.7 mL)</option>
+          <option value="desmopressin">desmopressin 0.01% (5 mL)</option>
           <option value="dymista">DYMISTA 137 mcg / 50 mcg (23 g) [azelastine / fluticasone]</option>
           <option value="flut50">FLONASE 50 mcg (16g) [fluticasone]</option>
           <option value="ipra3">ipratropium 0.03% (30 mL)</option>
@@ -92,6 +95,9 @@
       <p id="notes"></p>
     <script>
       function onchangeRoute() {
+        document.getElementById('proof').innerHTML = "";
+        document.getElementById('output').innerHTML = "";
+        document.getElementById('notes').innerHTML = "";
         const routeInput = document.getElementById('route');
         if (routeInput.value === 'EyeEar') {
           document.getElementById('ifEyeEar').style.display = 'block';
@@ -148,92 +154,144 @@
         }
       }
       function calc() {
-        var proof;
-        var output;
-        var notes;
+        var proof = "";
+        var output = "";
+        var notes = "";
         document.getElementById('proof').innerHTML = '';
         document.getElementById('output').innerHTML = '';
         document.getElementById('notes').innerHTML = '';
         switch (document.getElementById('route').value) {
           case 'EyeEar':
             let totalDrops;
+            let totalML = document.getElementById('EyeEarML').value;
+            let totalPkg = document.getElementById('EyeEarPkg').value;
+            let dailyDrops = document.getElementById('EyeEarGtt').value;
             // Calculate total number of drops
             switch (document.getElementById('eyeEarDrugs').value) {
               case 'other':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 20 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*20;
+                proof = "("+totalML+" mL x 20 drops/mL)";
+                totalDrops = totalML*20;
                 break;
               case 'bepreve':
               case 'xalatan':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 33 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*33;
+                proof = "("+totalML+" mL x 33 drops/mL)";
+                totalDrops = totalML*33;
                 break;
               case 'alrex':
+              case 'istalol':
               case 'timoptic':
               case 'vyzulta':
               case 'zylet':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 32 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*32;
+                proof = "("+totalML+" mL x 32 drops/mL)";
+                totalDrops = totalML*32;
                 break;
               case 'atropine':
               case 'besivance':
               case 'cyclopentolate':
               case 'dexamethasone':
               case 'lotemaxsusp':
-              case 'loteprednol':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 31 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*31;
+                proof = "("+totalML+" mL x 31 drops/mL)";
+                totalDrops = totalML*31;
                 break;
               case 'brimonidine':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 30 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*30;
+                proof = "("+totalML+" mL x 30 drops/mL)";
+                totalDrops = totalML*30;
                 break;
               case 'timopticxe':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 29 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*29;
+                proof = "("+totalML+" mL x 29 drops/mL)";
+                totalDrops = totalML*29;
+                break;
+              case 'diclofenac':
+              case 'dorzolamide':
+              case 'cosopt':
+                proof = "("+totalML+" mL x 28 drops/mL)";
+                totalDrops = totalML*28;
                 break;
               case 'zirgan':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 27 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*27;
+                proof = "("+totalML+" mL x 27 drops/mL)";
+                totalDrops = totalML*27;
                 break;
               case 'lotemaxgel':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 25 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*25;
+                proof = "("+totalML+" mL x 25 drops/mL)";
+                totalDrops = totalML*25;
                 break;
               case 'lumigan':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 24 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*24;
-                break;
-              case 'bromfenac':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 21 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*21;
+                proof = "("+totalML+" mL x 24 drops/mL)";
+                totalDrops = totalML*24;
                 break;
               case 'prolensa':
-                proof = "("+document.getElementById('EyeEarML').value+" mL x 19 drops/mL)";
-                totalDrops = document.getElementById('EyeEarML').value*19;
+                proof = "("+totalML+" mL x 19 drops/mL)";
+                totalDrops = totalML*19;
                 break;
               case 'miebo':
-                proof = "("+document.getElementById('EyeEarPkg').value+" pkg x 272 drops/mL)";
-                totalDrops = document.getElementById('EyeEarPkg').value*272;
+                proof = "("+totalPkg+" pkg x 272 drops/mL)";
+                totalDrops = totalPkg*272;
                 break;
               case 'lotemaxsm':
-                proof = "("+document.getElementById('EyeEarPkg').value+" pkg x 131 drops/mL)";
-                totalDrops = document.getElementById('EyeEarPkg').value*131;
+                proof = "("+totalPkg+" pkg x 131 drops/mL)";
+                totalDrops = totalPkg*131;
                 break;
             }
-            let dailyDrops = document.getElementById('EyeEarGtt').value;
             // Validate inputs and calculate days supply
             if (isNaN(totalDrops) || totalDrops < 1 || isNaN(dailyDrops) || dailyDrops < 1) {
               document.getElementById('output').innerHTML = "Invalid input(s)"
             } else {
               output = Math.floor(totalDrops / dailyDrops);
               proof = proof+" / "+dailyDrops+" drops per day =";
+              // Add notes to specific drugs
+              let standardDrops = Math.floor((totalML*20)/dailyDrops);
+              switch (document.getElementById('eyeEarDrugs').value) {
+                case 'atropine':
+                case 'brimonidine':
+                case 'cyclopentolate':
+                case 'dexamethasone':
+                case 'diclofenac':
+                case 'dexamethasone':
+                case 'diclofenac':
+                case 'dorzolamide':
+                case 'cosopt':
+                case 'levobunolol':
+                  notes = "Days supply calculation only applies to <u>Bausch & Lomb generic</u> (NDC: 24208 or 82260)<br>Use the following calculation for other manufacturers:<br>("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
+                  break;
+                case 'bepreve':
+                case 'lotemaxgel':
+                case 'timoptic':
+                case 'timopticxe':
+                  notes = "Days supply calculation only applies to <u>Bausch & Lomb brand/generic</u> (NDC: 24208 or 82260)<br>Use the following calculation for other manufacturers:<br>("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
+                  break;
+                case 'istalol':
+                case 'lotemaxsusp':
+                  notes = "Days supply calculation only applies to <u>Bausch & Lomb brand</u> (NDC: 24208 or 82260)<br>Use the following calculation for other manufacturers:<br>("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
+                  break;
+                case 'lumigan':
+                  notes = "Days supply calculation only applies to <u>Allergan brand</u> (NDC: 00023)<br>Use the following calculation for other manufacturers:<br>("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
+                  break;
+                case 'alrex':
+                  notes = "Days supply calculation only applies to <u>Bausch & Lomb brand</u> (NDC: 24208)<br>Use the following calculation for other manufacturers:<br>Bausch & Lomb generic (NDC: 82260): ("+totalML+" mL x 31 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*31)/dailyDrops))+" days supply<br>Other generics: ("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
+                  break;
+                case 'prolensa':
+                  notes = "Days supply calculation only applies to <u>Bausch & Lomb brand</u> (NDC: 24208 or 82260)<br>Use the following calculation for other manufacturers:<br>Bausch & Lomb generic (NDC: 82260): ("+totalML+" mL x 21 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*21)/dailyDrops))+" days supply<br>Other generics: ("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
+                  break;
+                case 'xalatan':
+                  if (Number((totalML*50)/dailyDrops) > 42) {
+                    notes = "<b>Expires 42 days after opening</b><br>";
+                  }
+                  notes = notes+"Days supply calculation only applies to <u>Pfizer brand</u> (NDC: 00013)<br>Use the following calculation for other manufacturers:<br>Bausch & Lomb (NDC: 24208): ("+totalML+" mL x 36 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*36)/dailyDrops))+" days supply<br>Greenstone (NDC: 59762): ("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply<br>Sandoz (NDC: 61314): ("+totalML+" mL x 35 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*35)/dailyDrops))+" days supply<br>Somerset (NDC: 70069): ("+totalML+" mL x 50 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*50)/dailyDrops))+" days supply";
+                  break;
+                case 'vyzulta':
+                  if (output > 56) {
+                    notes = "<b>Expires 56 days after opening</b>";
+                  }
+                  break;
+              }
               document.getElementById('proof').innerHTML = proof;
               document.getElementById('output').innerHTML = output+" days supply";
+              document.getElementById('notes').innerHTML = notes;
             }
             break;
           case 'Nose':
             let totalSprays;
+            let dailySprays = document.getElementById('NoseSpray').value;
             // Calculate total number of sprays
             switch (document.getElementById('noseDrugs').value) {
               case 'ipra3':
@@ -262,6 +320,10 @@
                 proof = "("+document.getElementById('NosePkg').value+" pkg x 60 sprays/pkg)";
                 totalSprays = document.getElementById('NosePkg').value*60;
                 break;
+              case 'desmopressin':
+                proof = "("+document.getElementById('NosePkg').value+" pkg x 50 sprays/pkg)";
+                totalSprays = document.getElementById('NosePkg').value*50;
+                break;
               case 'calcitonin':
                 proof = "("+document.getElementById('NosePkg').value+" pkg x 30 sprays/pkg)";
                 totalSprays = document.getElementById('NosePkg').value*30;
@@ -271,7 +333,6 @@
                 totalSprays = document.getElementById('NosePkg').value*14;
                 break;
             }
-            let dailySprays = document.getElementById('NoseSpray').value;
             // Validate inputs and calculate days supply
             if (isNaN(totalSprays) || totalSprays < 1) {
               document.getElementById('output').innerHTML = "Invalid input(s)"
@@ -284,49 +345,51 @@
             break;
           case 'Inj':
             let totalUnits;
+            let totalInjML = document.getElementById('injML').value;
             // Calculate total number of units
             switch (document.getElementById('injDrugs').value) {
               case 'u100pen':
               case 'u100vial':
-                proof = "("+document.getElementById('injML').value+" mL x 100 units/mL)";
-                totalUnits = document.getElementById('injML').value*100;
+                proof = "("+totalInjML+" mL x 100 units/mL)";
+                totalUnits = totalInjML*100;
                 break;
               case 'u200pen':
-                proof = "("+document.getElementById('injML').value+" mL x 200 units/mL)";
-                totalUnits = document.getElementById('injML').value*200;
+                proof = "("+totalInjML+" mL x 200 units/mL)";
+                totalUnits = totalInjML*200;
               case 'toujeo':
               case 'toujeomax':
-                proof = "("+document.getElementById('injML').value+" mL x 300 units/mL)";
-                totalUnits = document.getElementById('injML').value*300;
+                proof = "("+totalInjML+" mL x 300 units/mL)";
+                totalUnits = totalInjML*300;
                 break;
               case 'u500pen':
               case 'u500vial':
-                proof = "("+document.getElementById('injML').value+" mL x 500 units/mL)";
-                totalUnits = document.getElementById('injML').value*500;
+                proof = "("+totalInjML+" mL x 500 units/mL)";
+                totalUnits = totalInjML*500;
                 break;
             }
             let dailyUnits;
+            let totalDailyUnits = document.getElementById('injIU').value;
             // Calculate total daily dose (pens only)
             switch (document.getElementById('injDrugs').value) {
               case 'u100pen':
               case 'u200pen':
-                proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 2 priming units)) =";
-                dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*2);
+                proof = proof+" / ("+totalDailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 2 priming units)) =";
+                dailyUnits = Number(totalDailyUnits)+(document.getElementById('injFreq').value*2);
                 notes = "Check room temperature stability of drug if over 28 days supply<br>Mixed insulins have shorter stability at 10-14 days supply";
                 break;
               case 'toujeo':
-                proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 3 priming units)) =";
-                dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*3);
+                proof = proof+" / ("+totalDailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 3 priming units)) =";
+                dailyUnits = Number(totalDailyUnits)+(document.getElementById('injFreq').value*3);
                 notes = "Check room temperature stability of drug if over 56 days supply";
                 break;
               case 'toujeomax':
-                proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 4 priming units)) =";
-                dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*4);
+                proof = proof+" / ("+totalDailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 4 priming units)) =";
+                dailyUnits = Number(totalDailyUnits)+(document.getElementById('injFreq').value*4);
                 notes = "Check room temperature stability of drug if over 56 days supply";
                 break;
               case 'u500pen':
-                proof = proof+" / ("+document.getElementById('injIU').value+" units + ("+document.getElementById('injFreq').value+" injections x 5 priming units)) =";
-                dailyUnits = Number(document.getElementById('injIU').value)+(document.getElementById('injFreq').value*5);
+                proof = proof+" / ("+totalDailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 5 priming units)) =";
+                dailyUnits = Number(totalDailyUnits)+(document.getElementById('injFreq').value*5);
                 notes = "Check room temperature stability of drug if over 28 days supply";
                 break;
               case 'ozempic':
@@ -341,6 +404,7 @@
               document.getElementById('output').innerHTML = "Invalid input(s)";
             } else if (totalUnits == 169413001) {
               document.getElementById('proof').innerHTML = proof;
+              document.getElementById('notes').innerHTML = notes;
             } else {
               output = Math.floor(totalUnits / dailyUnits);
               document.getElementById('proof').innerHTML = proof;
