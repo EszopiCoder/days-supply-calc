@@ -11,6 +11,7 @@
         <option value="EyeEar">Ophthalmic/Otic</option>
         <option value="Nose">Intranasal</option>
         <option value="Inj">Injection</option>
+        <option value="Device">Device</option>
       </select>
       <div id="ifEyeEar" style="display:block">
         Select Ophthalmic/Otic Drug:
@@ -89,6 +90,58 @@
           <p id="numPens"></p>
         </div>
       </div>
+      <div id="ifDevice" style="display:none">
+        <table>
+          <tr>
+            <th>Device Name</th>
+            <th>Package Size</th>
+            <th>Days Supply</th>
+            <th>Change Frequency</th>
+          </tr>
+          <tr>
+            <td>Freestyle Libre 1/2/3</td>
+            <td>1 sensor</td>
+            <td>14 per box</td>
+            <td>Every 14 days</td>
+          </tr>
+          <tr>
+            <td>Dexcom G6 Sensor</td>
+            <td>3 sensors</td>
+            <td>30 per box</td>
+            <td>Every 10 days</td>
+          </tr>
+          <tr>
+            <td>Dexcom G6 Transmitter</td>
+            <td>1 transmitter</td>
+            <td>90 per box</td>
+            <td>Every 90 days</td>
+          </tr>
+          <tr>
+            <td>Dexcom G6 Receiver</td>
+            <td>1 receiver</td>
+            <td>Indefinitely</td>
+            <td>Not applicable</td>
+          </tr>
+          <tr>
+            <td>Dexcom G7 Sensor</td>
+            <td>1 sensor</td>
+            <td>10 per box</td>
+            <td>Every 10 days</td>
+          </tr>
+          <tr>
+            <td>Dexcom G7 Receiver</td>
+            <td>1 receiver</td>
+            <td>Indefinitely</td>
+            <td>Not applicable</td>
+          </tr>
+          <tr>
+            <td>Omnipod Gen 3/4/5</td>
+            <td>5 pods</td>
+            <td>10-15 per box</td>
+            <td>Every 2-3 days</td>
+          </tr>
+        </table>
+      </div>
       <br><input type="button" value="Calculate" onclick="calc()">
       <p id="proof"></p>
       <p id="output"></p>
@@ -98,23 +151,19 @@
         document.getElementById('proof').innerHTML = "";
         document.getElementById('output').innerHTML = "";
         document.getElementById('notes').innerHTML = "";
+        document.getElementById('ifEyeEar').style.display = 'none';
+        document.getElementById('ifNose').style.display = 'none';
+        document.getElementById('ifInj').style.display = 'none';
+        document.getElementById('ifDevice').style.display = 'none';
         const routeInput = document.getElementById('route');
         if (routeInput.value === 'EyeEar') {
           document.getElementById('ifEyeEar').style.display = 'block';
-          document.getElementById('ifNose').style.display = 'none';
-          document.getElementById('ifInj').style.display = 'none';
         } else if (routeInput.value === 'Nose') {
-          document.getElementById('ifEyeEar').style.display = 'none';
           document.getElementById('ifNose').style.display = 'block';
-          document.getElementById('ifInj').style.display = 'none';
         } else if (routeInput.value === 'Inj') {
-          document.getElementById('ifEyeEar').style.display = 'none';
-          document.getElementById('ifNose').style.display = 'none';
           document.getElementById('ifInj').style.display = 'block';
-        } else {
-          document.getElementById('ifEyeEar').style.display = 'none';
-          document.getElementById('ifNose').style.display = 'none';
-          document.getElementById('ifInj').style.display = 'none';
+        } else if (routeInput.value === 'Device') {
+          document.getElementById('ifDevice').style.display = 'block';
         }
       }
       function onchangeEyeEar() {
