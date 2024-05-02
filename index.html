@@ -12,6 +12,7 @@
         <option value="Nose">Intranasal</option>
         <option value="Inj">Injection</option>
         <option value="Device">Device</option>
+        <option value="Kit">Kit</option>
       </select>
       <div id="ifEyeEar" style="display:block">
         Select Ophthalmic/Otic Drug:
@@ -142,6 +143,51 @@
           </tr>
         </table>
       </div>
+      <div id="ifKit" style="display:none">
+        <table>
+          <tr>
+            <th>Brand Name</th>
+            <th>Generic Name</th>
+            <th>Package Size</th>
+            <th>Days Supply</th>
+            <th>Directions</th>
+          </tr>
+          <tr>
+            <td>CHANTIX 0.5 mg /1 mg</td>
+            <td>varenicline</td>
+            <td>53</td>
+            <td>28</td>
+            <td>0.5 mg daily for 3 days, 0.5 mg twice daily for 4 days, 1 mg twice daily for 21 days</td>
+          </tr>
+          <tr>
+            <td>ELIQUIS 5 mg</td>
+            <td>apixaban</td>
+            <td>74</td>
+            <td>30</td>
+            <td>2 tablets twice daily for 7 days, 1 tablet twice daily for 23 days</td>
+          </tr>
+          <tr>
+            <td>MEDROL DOSEPAK 4 mg</td>
+            <td>methylprednisolone</td>
+            <td>21</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>XARELTO 15 mg / 20 mg</td>
+            <td>rivaroxaban</td>
+            <td>51</td>
+            <td>30</td>
+            <td>15 mg twice daily for 21 days, 20 mg daily for 9 days</td>
+          </tr>
+          <tr>
+            <td>Z-PAK 250 mg</td>
+            <td>azithromycin</td>
+            <td>6</td>
+            <td>5</td>
+            <td>2 tablets on day 1 then 1 tablet daily on days 2 to 5</td>
+          </tr>
+        </table>
+      </div>
       <br><input type="button" value="Calculate" onclick="calc()">
       <p id="proof"></p>
       <p id="output"></p>
@@ -155,6 +201,7 @@
         document.getElementById('ifNose').style.display = 'none';
         document.getElementById('ifInj').style.display = 'none';
         document.getElementById('ifDevice').style.display = 'none';
+        document.getElementById('ifKit').style.display = 'none';
         const routeInput = document.getElementById('route');
         if (routeInput.value === 'EyeEar') {
           document.getElementById('ifEyeEar').style.display = 'block';
@@ -164,6 +211,8 @@
           document.getElementById('ifInj').style.display = 'block';
         } else if (routeInput.value === 'Device') {
           document.getElementById('ifDevice').style.display = 'block';
+        } else if (routeInput.value === 'Kit') {
+          document.getElementById('ifKit').style.display = 'block';
         }
       }
       function onchangeEyeEar() {
