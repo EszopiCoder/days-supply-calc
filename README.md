@@ -61,3 +61,15 @@ This web-based calculator is deployed via GitHub pages and can be accessed from 
 | OZEMPIC 1mg/2mg (3 mL) | semaglutide | Injection | 4 per package | 0 | # mg |  | 28 days supply |
 
 Last updated 05/2024
+## Days Supply Calculations for Devices
+| Device Name | Package Size | Days Supply | Change Frequency |
+| --- | --- | --- | --- |
+| Freestyle Libre 1/2/3 | 1 sensor | 14 per box | Every 14 days |
+| Dexcom G6 Sensor | 3 sensors | 30 per box | Every 10 days |
+| Dexcom G6 Transmitter | 1 transmitter | 90 per box | Every 90 days |
+| Dexcom G6 Receiver | 1 receiver | Indefinitely | Not applicable |
+| Dexcom G7 Sensor | 1 sensor | 10 per box | Every 10 days |
+| Dexcom G7 Receiver | 1 receiver | Indefinitely | Not applicable |
+| Omnipod Gen 3/4/5 | 5 pods | 10-15 per box | Every 2-3 days |
+
+Last updated 05/2024
