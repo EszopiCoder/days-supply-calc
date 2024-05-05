@@ -8,193 +8,225 @@
   <body>
     <h1>Days Supply Calculator</h1>
     <p>Open source and web-based (<a href="https://github.com/EszopiCoder/days-supply-calc/" target="_blank">GitHub</a>)</p>
-    <form action="/action_page.php">
-      Select Route:
-      <select id="route" name="route" onchange="onchangeRoute()">
-        <option value="EyeEar">Ophthalmic/Otic</option>
-        <option value="Nose">Intranasal</option>
-        <option value="Inj">Injection</option>
-        <option value="Device">Device</option>
-        <option value="Kit">Kit</option>
-      </select>
-      <div id="ifEyeEar" style="display:block">
-        Select Ophthalmic/Otic Drug:
-        <select id="eyeEarDrugs" name="eyeEarDrugs" onchange="onchangeEyeEar()">
-          <option value="other">Other</option>
-          <option value="alrex">ALREX 0.2% [loteprednol etabonate]</option>
-          <option value="atropine">atropine 1%</option>
-          <option value="bepreve">BEPREVE 1.5% [bepotastine]</option>
-          <option value="besivance">BESIVANCE 0.6% [besifloxacin]</option>
-          <option value="brimonidine">brimonidine 0.2%</option>
-          <option value="cyclopentolate">cyclopentolate 1%</option>
-          <option value="dexamethasone">dexamethasone 0.1%</option>
-          <option value="diclofenac">diclofenac sod 0.1%</option>
-          <option value="dorzolamide">dorzolamide sod 2%</option>
-          <option value="cosopt">COSOPT 2% / 0.5% [dorzolamide sod / timolol maleate]</option>
-          <option value="istalol">ISTALOL 0.5% [timolol maleate]</option>
-          <option value="levobunolol">levobunolol 0.5%</option>
-          <option value="lotemaxsusp">LOTEMAX 0.5% susp [loteprednol etabonate]</option>
-          <option value="lotemaxgel">LOTEMAX 0.5% gel (5 g) [loteprednol etabonate]</option>
-          <option value="lotemaxsm">LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]</option>
-          <option value="lumigan">LUMIGAN 0.01% [bimatoprost]</option>
-          <option value="miebo">MIEBO 1.3 GM/mL (3 mL) [perfluorohexyloctane]</option>
-          <option value="prolensa">PROLENSA 0.07% (3 mL) [bromfenac sodium]</option>
-          <option value="timoptic">TIMOPTIC [timolol maleate]</option>
-          <option value="timopticxe">TIMOPTIC XE (5 mL) [timolol maleate gel forming]</option>
-          <option value="vyzulta">VYZULTA 0.024% [latanoprostene bunod]</option>
-          <option value="xalatan">XALATAN 0.005% (2.5 mL) [latanoprost]</option>
-          <option value="zirgan">ZIRGAN 0.15% (5 g) [ganciclovir]</option>
-          <option value="zylet">ZYLET 0.5% / 0.3% [loteprednol etabonate / tobramycin]</option>
+    <hr>
+    <form>
+      <div>
+        <label for="route">Select Route:</label>
+        <select id="route" name="route" onchange="onchangeRoute()">
+          <option value="EyeEar">Ophthalmic/Otic</option>
+          <option value="Nose">Intranasal</option>
+          <option value="Inj">Injection</option>
+          <option value="Device">Device</option>
+          <option value="Kit">Kit</option>
         </select>
+      </div>
+      <div id="ifEyeEar" style="display:block">
+        <div>
+          <label for="eyeEarDrugs">Select Ophthalmic/Otic Drug:</label>
+          <select id="eyeEarDrugs" name="eyeEarDrugs" onchange="onchangeEyeEar()">
+            <option value="other">Other</option>
+            <option value="alrex">ALREX 0.2% [loteprednol etabonate]</option>
+            <option value="atropine">atropine 1%</option>
+            <option value="bepreve">BEPREVE 1.5% [bepotastine]</option>
+            <option value="besivance">BESIVANCE 0.6% [besifloxacin]</option>
+            <option value="brimonidine">brimonidine 0.2%</option>
+            <option value="cyclopentolate">cyclopentolate 1%</option>
+            <option value="dexamethasone">dexamethasone 0.1%</option>
+            <option value="diclofenac">diclofenac sod 0.1%</option>
+            <option value="dorzolamide">dorzolamide sod 2%</option>
+            <option value="cosopt">COSOPT 2% / 0.5% [dorzolamide sod / timolol maleate]</option>
+            <option value="istalol">ISTALOL 0.5% [timolol maleate]</option>
+            <option value="levobunolol">levobunolol 0.5%</option>
+            <option value="lotemaxsusp">LOTEMAX 0.5% susp [loteprednol etabonate]</option>
+            <option value="lotemaxgel">LOTEMAX 0.5% gel (5 g) [loteprednol etabonate]</option>
+            <option value="lotemaxsm">LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]</option>
+            <option value="lumigan">LUMIGAN 0.01% [bimatoprost]</option>
+            <option value="miebo">MIEBO 1.3 GM/mL (3 mL) [perfluorohexyloctane]</option>
+            <option value="prolensa">PROLENSA 0.07% (3 mL) [bromfenac sodium]</option>
+            <option value="timoptic">TIMOPTIC [timolol maleate]</option>
+            <option value="timopticxe">TIMOPTIC XE (5 mL) [timolol maleate gel forming]</option>
+            <option value="vyzulta">VYZULTA 0.024% [latanoprostene bunod]</option>
+            <option value="xalatan">XALATAN 0.005% (2.5 mL) [latanoprost]</option>
+            <option value="zirgan">ZIRGAN 0.15% (5 g) [ganciclovir]</option>
+            <option value="zylet">ZYLET 0.5% / 0.3% [loteprednol etabonate / tobramycin]</option>
+          </select>
+        </div>
         <div id="ifEyeEarML" style="display:block">
-          Enter Package Size (mL):<input type="text" id="EyeEarML">
+          <label for="EyeEarML">Enter Package Size (mL):</label>
+          <input type="text" id="EyeEarML">
         </div>
         <div id="ifEyeEarPkg" style="display:none">
-          Enter # of Packages:<input type="text" id="EyeEarPkg" value="1">
+          <label for="EyeEarPkg">Enter # of Packages:</label>
+          <input type="text" id="EyeEarPkg" value="1">
         </div>
-        Enter Total Drops per Day:<input type="text" id="EyeEarGtt">
-        <br>Note: Account for one or both eyes/ears in total drops per day
+        <div>
+          <label for="EyeEarGtt">Enter Total Drops per Day:</label>
+          <input type="text" id="EyeEarGtt">
+        </div>
+        <span>Note: Account for <u>one or both eyes/ears</u> in total drops per day</span>
       </div>
-      <div id="ifNose" style="display:none">Select Intranasal Drug:
-        <select id="noseDrugs" name="noseDrugs">
-          <option value="azelastine">azelastine 0.1% (30 mL)</option>
-          <option value="butorphanol">butorphanol 10 mg/mL (2.5 mL)</option>
-          <option value="calcitonin">calcitonin salmon 220 USP (3.7 mL)</option>
-          <option value="desmopressin">desmopressin 0.01% (5 mL)</option>
-          <option value="dymista">DYMISTA 137 mcg / 50 mcg (23 g) [azelastine / fluticasone]</option>
-          <option value="flut50">FLONASE 50 mcg (16g) [fluticasone]</option>
-          <option value="ipra3">ipratropium 0.03% (30 mL)</option>
-          <option value="ipra6">ipratropium 0.06% (15 mL)</option>
-          <option value="ryaltris">RYALTRIS 665 mcg / 25 mcg (29 g) [olopatadine / mometasone]</option>
-          <option value="omnaris">OMNARIS 50 mcg (12.5 g) [ciclesonide]</option>
-          <option value="zetonna">ZETONNA 37 mcg (6.1 g) [ciclesonide]</option>
-        </select>
-        <br>Enter # of Packages:<input type="text" id="NosePkg" value="1">
-        <br>Enter Total Sprays per Day:<input type="text" id="NoseSpray">
-        <br>Note: Account for one or both nostrils in total sprays per day
+      <div id="ifNose" style="display:none">
+        <div>
+          <label for="noseDrugs">Select Intranasal Drug:</label>
+          <select id="noseDrugs" name="noseDrugs">
+            <option value="azelastine">azelastine 0.1% (30 mL)</option>
+            <option value="butorphanol">butorphanol 10 mg/mL (2.5 mL)</option>
+            <option value="calcitonin">calcitonin salmon 220 USP (3.7 mL)</option>
+            <option value="desmopressin">desmopressin 0.01% (5 mL)</option>
+            <option value="dymista">DYMISTA 137 mcg / 50 mcg (23 g) [azelastine / fluticasone]</option>
+            <option value="flut50">FLONASE 50 mcg (16g) [fluticasone]</option>
+            <option value="ipra3">ipratropium 0.03% (30 mL)</option>
+            <option value="ipra6">ipratropium 0.06% (15 mL)</option>
+            <option value="ryaltris">RYALTRIS 665 mcg / 25 mcg (29 g) [olopatadine / mometasone]</option>
+            <option value="omnaris">OMNARIS 50 mcg (12.5 g) [ciclesonide]</option>
+            <option value="zetonna">ZETONNA 37 mcg (6.1 g) [ciclesonide]</option>
+          </select>
+        </div>
+        <div>
+          <label for="NosePkg">Enter # of Packages:</label>
+          <input type="text" id="NosePkg" value="1">
+        </div>
+        <div>
+          <label for="NoseSpray">Total Sprays per Day:</label>
+          <input type="text" id="NoseSpray">
+        </div>
+        <span>Note: Account for <u>one or both nostrils</u> in total sprays per day</span>
       </div>
-      <div id="ifInj" style="display:none">Select Injectable Drug:
-        <select id="injDrugs" name="injDrugs" onchange="onchangeInj()">
-          <option value="u100pen">U-100 insulin PEN (3 mL)</option>
-          <option value="u100vial">U-100 insulin VIAL (3 mL or 10 mL)</option>
-          <option value="u200pen">U-200 insulin PEN (3 mL)</option>
-          <option value="toujeo">U-300 TOUJEO PEN (1.5 mL) [insulin glargine]</option>
-          <option value="toujeomax">U-300 TOUJEO MAX PEN (3 mL) [insulin glargine]</option>
-          <option value="u500pen">U-500 HUMULIN R PEN (3 mL) [insulin human]</option>
-          <option value="u500vial">U-500 HUMULIN R VIAL (20 mL) [insulin human]</option>
-          <option value="ozempic">OZEMPIC (3 mL) [semaglutide]</option>
-        </select>
+      <div id="ifInj" style="display:none">
+        <div>
+          <label for="injDrugs">Select Injectable Drug:</label>
+          <select id="injDrugs" name="injDrugs" onchange="onchangeInj()">
+            <option value="u100pen">U-100 insulin PEN (3 mL)</option>
+            <option value="u100vial">U-100 insulin VIAL (3 mL or 10 mL)</option>
+            <option value="u200pen">U-200 insulin PEN (3 mL)</option>
+            <option value="toujeo">U-300 TOUJEO PEN (1.5 mL) [insulin glargine]</option>
+            <option value="toujeomax">U-300 TOUJEO MAX PEN (3 mL) [insulin glargine]</option>
+            <option value="u500pen">U-500 HUMULIN R PEN (3 mL) [insulin human]</option>
+            <option value="u500vial">U-500 HUMULIN R VIAL (20 mL) [insulin human]</option>
+            <option value="ozempic">OZEMPIC (3 mL) [semaglutide]</option>
+          </select>
+        </div>
         <div id="insulin" style="display:block">
-          Enter Package Size (mL):<input type="text" id="injML" oninput="calcPens()">
-          <br>Enter Total Units per Day:<input type="text" id="injIU">
+          <div>
+            <label for="injML">Enter Package Size (mL):</label>
+            <input type="text" id="injML" oninput="calcPens()">
+          </div>
+          <div>
+            <label for="injIU">Enter Total Units per Day:</label>
+            <input type="text" id="injIU">
+          </div>
         </div>
         <div id="insulinPen" style="display:block">
-          Enter # of Injections per Day:<input type="text" id="injFreq">
-          <br>Note: Exclude priming doses from total units per day
+          <div>
+            <label for="injFreq">Enter # of Injections per Day:</label>
+            <input type="text" id="injFreq">
+          </div>
+          <span>Note: Exclude priming doses from total units per day</span>
           <p id="numPens"></p>
         </div>
       </div>
-      <div id="ifDevice" style="display:none">
-        <table>
-          <tr>
-            <th>Device Name</th>
-            <th>Package Size</th>
-            <th>Days Supply</th>
-            <th>Change Frequency</th>
-          </tr>
-          <tr>
-            <td>Freestyle Libre 1/2/3</td>
-            <td>1 sensor</td>
-            <td>14 per box</td>
-            <td>Every 14 days</td>
-          </tr>
-          <tr>
-            <td>Dexcom G6 Sensor</td>
-            <td>3 sensors</td>
-            <td>30 per box</td>
-            <td>Every 10 days</td>
-          </tr>
-          <tr>
-            <td>Dexcom G6 Transmitter</td>
-            <td>1 transmitter</td>
-            <td>90 per box</td>
-            <td>Every 90 days</td>
-          </tr>
-          <tr>
-            <td>Dexcom G6 Receiver</td>
-            <td>1 receiver</td>
-            <td>Indefinitely</td>
-            <td>Not applicable</td>
-          </tr>
-          <tr>
-            <td>Dexcom G7 Sensor</td>
-            <td>1 sensor</td>
-            <td>10 per box</td>
-            <td>Every 10 days</td>
-          </tr>
-          <tr>
-            <td>Dexcom G7 Receiver</td>
-            <td>1 receiver</td>
-            <td>Indefinitely</td>
-            <td>Not applicable</td>
-          </tr>
-          <tr>
-            <td>Omnipod Gen 3/4/5</td>
-            <td>5 pods</td>
-            <td>10-15 per box</td>
-            <td>Every 2-3 days</td>
-          </tr>
-        </table>
-      </div>
-      <div id="ifKit" style="display:none">
-        <table>
-          <tr>
-            <th>Brand Name</th>
-            <th>Generic Name</th>
-            <th>Package Size</th>
-            <th>Days Supply</th>
-            <th>Directions</th>
-          </tr>
-          <tr>
-            <td>CHANTIX 0.5 mg /1 mg</td>
-            <td>varenicline</td>
-            <td>53</td>
-            <td>28</td>
-            <td>0.5 mg daily for 3 days, 0.5 mg twice daily for 4 days, 1 mg twice daily for 21 days</td>
-          </tr>
-          <tr>
-            <td>ELIQUIS 5 mg</td>
-            <td>apixaban</td>
-            <td>74</td>
-            <td>30</td>
-            <td>2 tablets twice daily for 7 days, 1 tablet twice daily for 23 days</td>
-          </tr>
-          <tr>
-            <td>MEDROL DOSEPAK 4 mg</td>
-            <td>methylprednisolone</td>
-            <td>21</td>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td>XARELTO 15 mg / 20 mg</td>
-            <td>rivaroxaban</td>
-            <td>51</td>
-            <td>30</td>
-            <td>15 mg twice daily for 21 days, 20 mg daily for 9 days</td>
-          </tr>
-          <tr>
-            <td>Z-PAK 250 mg</td>
-            <td>azithromycin</td>
-            <td>6</td>
-            <td>5</td>
-            <td>2 tablets on day 1 then 1 tablet daily on days 2 to 5</td>
-          </tr>
-        </table>
-      </div>
-      <br><input type="button" value="Calculate" onclick="calc()">
-      <p id="proof"></p>
-      <p id="output"></p>
-      <p id="notes"></p>
+      <input type="button" value="Calculate" onclick="calc()">
+    </form>
+    <div id="ifDevice" style="display:none">
+      <table>
+        <tr>
+          <th>Device Name</th>
+          <th>Package Size</th>
+          <th>Days Supply</th>
+          <th>Change Frequency</th>
+        </tr>
+        <tr>
+          <td>Freestyle Libre 1/2/3</td>
+          <td>1 sensor</td>
+          <td>14 per box</td>
+          <td>Every 14 days</td>
+        </tr>
+        <tr>
+          <td>Dexcom G6 Sensor</td>
+          <td>3 sensors</td>
+          <td>30 per box</td>
+          <td>Every 10 days</td>
+        </tr>
+        <tr>
+          <td>Dexcom G6 Transmitter</td>
+          <td>1 transmitter</td>
+          <td>90 per box</td>
+          <td>Every 90 days</td>
+        </tr>
+        <tr>
+          <td>Dexcom G6 Receiver</td>
+          <td>1 receiver</td>
+          <td>Indefinitely</td>
+          <td>Not applicable</td>
+        </tr>
+        <tr>
+          <td>Dexcom G7 Sensor</td>
+          <td>1 sensor</td>
+          <td>10 per box</td>
+          <td>Every 10 days</td>
+        </tr>
+        <tr>
+          <td>Dexcom G7 Receiver</td>
+          <td>1 receiver</td>
+          <td>Indefinitely</td>
+          <td>Not applicable</td>
+        </tr>
+        <tr>
+          <td>Omnipod Gen 3/4/5</td>
+          <td>5 pods</td>
+          <td>10-15 per box</td>
+          <td>Every 2-3 days</td>
+        </tr>
+      </table>
+    </div>
+    <div id="ifKit" style="display:none">
+      <table>
+        <tr>
+          <th>Brand Name</th>
+          <th>Generic Name</th>
+          <th>Package Size</th>
+          <th>Days Supply</th>
+          <th>Directions</th>
+        </tr>
+        <tr>
+          <td>CHANTIX 0.5 mg /1 mg</td>
+          <td>varenicline</td>
+          <td>53</td>
+          <td>28</td>
+          <td>0.5 mg daily for 3 days, 0.5 mg twice daily for 4 days, 1 mg twice daily for 21 days</td>
+        </tr>
+        <tr>
+          <td>ELIQUIS 5 mg</td>
+          <td>apixaban</td>
+          <td>74</td>
+          <td>30</td>
+          <td>2 tablets twice daily for 7 days, 1 tablet twice daily for 23 days</td>
+        </tr>
+        <tr>
+          <td>MEDROL DOSEPAK 4 mg</td>
+          <td>methylprednisolone</td>
+          <td>21</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>XARELTO 15 mg / 20 mg</td>
+          <td>rivaroxaban</td>
+          <td>51</td>
+          <td>30</td>
+          <td>15 mg twice daily for 21 days, 20 mg daily for 9 days</td>
+        </tr>
+        <tr>
+          <td>Z-PAK 250 mg</td>
+          <td>azithromycin</td>
+          <td>6</td>
+          <td>5</td>
+          <td>2 tablets on day 1 then 1 tablet daily on days 2 to 5</td>
+        </tr>
+      </table>
+    </div>
+    <p id="proof" class="result"></p>
+    <p id="output" class="result"></p>
+    <p id="notes" class="result"></p>
     </form>
   </body>
 </html>
