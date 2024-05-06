@@ -5,6 +5,8 @@ function onchangeRoute() {
   document.getElementById('ifEyeEar').style.display = 'none';
   document.getElementById('ifNose').style.display = 'none';
   document.getElementById('ifInj').style.display = 'none';
+  document.getElementById('ozempic').style.display = 'none';
+  document.getElementById('liraglutide').style.display = 'none';
   document.getElementById('ifDevice').style.display = 'none';
   document.getElementById('ifKit').style.display = 'none';
   const routeInput = document.getElementById('route');
@@ -31,6 +33,7 @@ function onchangeEyeEar() {
   }
 }
 function onchangeInj() {
+  document.getElementById('ozempic').style.display = 'none';
   const injInput = document.getElementById('injDrugs');
   if (injInput.value == 'u100vial' || injInput.value == 'u500vial') {
     document.getElementById('insulin').style.display = 'block';
@@ -317,9 +320,10 @@ function calc() {
         case 'ozempic':
           totalUnits = 169413001;
           dailyUnits = 1;
-          proof = "<table><tr><th>Strength</th><th>Directions</th><th>Days Supply</th></tr><tr><td>0.25 mg or 0.5 mg</td><td>Inject 0.25 mg once weekly</td><td>56 days</td></tr><tr><td>0.25 mg or 0.5 mg</td><td>Inject 0.25 mg once weekly for 4 weeks, 0.5 mg once weekly for 2 weeks</td><td>42 days supply</td></tr><tr><td>0.25 mg or 0.5 mg</td><td>Inject 0.5 mg once weekly</td><td>28 days supply</td></tr><tr><td>1 mg</td><td>Inject 1 mg once weekly</td><td>28 days supply</td></tr><tr><td>2 mg</td><td>Inject 2 mg once weekly</td><td>28 days supply</td></tr></table>";
-          notes = "";
           break;
+        case 'liraglutide':
+          totalUnits = 169406012;
+          dailyUnits = 1;
         default:
           proof = proof+" / ("+dailyUnits+" units) ="
           notes = "Check room temperature stability of drug if over 28 days supply";
@@ -338,9 +342,11 @@ function calc() {
       if (isNaN(totalUnits) || totalUnits < 1 || isNaN(dailyUnits) || dailyUnits < 1) {
         document.getElementById('output').innerHTML = "Invalid input(s)";
       } else if (totalUnits == 169413001) {
-        document.getElementById('proof').innerHTML = proof;
-        document.getElementById('notes').innerHTML = notes;
-      } else {
+        document.getElementById('ozempic').style.display = 'block';
+      } else if (totalUnits == 169406012) {
+        document.getElementById('liraglutide').style.display = 'block';
+      }
+      else {
         output = Math.floor(totalUnits / dailyUnits);
         document.getElementById('proof').innerHTML = proof;
         document.getElementById('output').innerHTML = output+" days supply";
