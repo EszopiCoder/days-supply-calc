@@ -34,6 +34,7 @@ function onchangeEyeEar() {
 }
 function onchangeInj() {
   document.getElementById('ozempic').style.display = 'none';
+  document.getElementById('liraglutide').style.display = 'none';
   const injInput = document.getElementById('injDrugs');
   if (injInput.value == 'u100vial' || injInput.value == 'u500vial') {
     document.getElementById('insulin').style.display = 'block';
