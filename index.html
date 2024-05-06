@@ -104,6 +104,7 @@
             <option value="u500pen">U-500 HUMULIN R PEN (3 mL) [insulin human]</option>
             <option value="u500vial">U-500 HUMULIN R VIAL (20 mL) [insulin human]</option>
             <option value="ozempic">OZEMPIC (3 mL) [semaglutide]</option>
+            <option value="liraglutide">VICTOZA or SAXENDA (3 mL) [liraglutide]</option>
           </select>
         </div>
         <div id="insulin" style="display:block">
@@ -127,109 +128,176 @@
       </div>
       <input type="button" value="Calculate" onclick="calc()">
     </form>
-    <div id="ifDevice" style="display:none">
-      <table>
-        <tr>
-          <th>Device Name</th>
-          <th>Package Size</th>
-          <th>Days Supply</th>
-          <th>Change Frequency</th>
-        </tr>
-        <tr>
-          <td>Freestyle Libre 1/2/3</td>
-          <td>1 sensor</td>
-          <td>14 per box</td>
-          <td>Every 14 days</td>
-        </tr>
-        <tr>
-          <td>Dexcom G6 Sensor</td>
-          <td>3 sensors</td>
-          <td>30 per box</td>
-          <td>Every 10 days</td>
-        </tr>
-        <tr>
-          <td>Dexcom G6 Transmitter</td>
-          <td>1 transmitter</td>
-          <td>90 per box</td>
-          <td>Every 90 days</td>
-        </tr>
-        <tr>
-          <td>Dexcom G6 Receiver</td>
-          <td>1 receiver</td>
-          <td>Indefinitely</td>
-          <td>Not applicable</td>
-        </tr>
-        <tr>
-          <td>Dexcom G7 Sensor</td>
-          <td>1 sensor</td>
-          <td>10 per box</td>
-          <td>Every 10 days</td>
-        </tr>
-        <tr>
-          <td>Dexcom G7 Receiver</td>
-          <td>1 receiver</td>
-          <td>Indefinitely</td>
-          <td>Not applicable</td>
-        </tr>
-        <tr>
-          <td>Omnipod Gen 3/4/5</td>
-          <td>5 pods</td>
-          <td>10-15 per box</td>
-          <td>Every 2-3 days</td>
-        </tr>
-      </table>
-    </div>
-    <div id="ifKit" style="display:none">
-      <table>
-        <tr>
-          <th>Brand Name</th>
-          <th>Generic Name</th>
-          <th>Package Size</th>
-          <th>Days Supply</th>
-          <th>Directions</th>
-        </tr>
-        <tr>
-          <td>CHANTIX 0.5 mg /1 mg</td>
-          <td>varenicline</td>
-          <td>53</td>
-          <td>28</td>
-          <td>0.5 mg daily for 3 days, 0.5 mg twice daily for 4 days, 1 mg twice daily for 21 days</td>
-        </tr>
-        <tr>
-          <td>ELIQUIS 5 mg</td>
-          <td>apixaban</td>
-          <td>74</td>
-          <td>30</td>
-          <td>2 tablets twice daily for 7 days, 1 tablet twice daily for 23 days</td>
-        </tr>
-        <tr>
-          <td>MEDROL DOSEPAK 4 mg</td>
-          <td>methylprednisolone</td>
-          <td>21</td>
-          <td>6</td>
-        </tr>
-        <tr>
-          <td>XARELTO 15 mg / 20 mg</td>
-          <td>rivaroxaban</td>
-          <td>51</td>
-          <td>30</td>
-          <td>15 mg twice daily for 21 days, 20 mg daily for 9 days</td>
-        </tr>
-        <tr>
-          <td>Z-PAK 250 mg</td>
-          <td>azithromycin</td>
-          <td>6</td>
-          <td>5</td>
-          <td>2 tablets on day 1 then 1 tablet daily on days 2 to 5</td>
-        </tr>
-      </table>
-    </div>
     <div>
       <h2>Result:</h2>
       <p id="proof" class="result"></p>
       <p id="output" class="result"></p>
       <p id="notes" class="result"></p>
+      <div id="ozempic" style="display:none">
+        <table>
+          <tr>
+            <th>Strength</th>
+            <th>Directions</th>
+            <th>Days Supply</th>
+          </tr>
+          <tr>
+            <td>0.25 mg or 0.5 mg</td>
+            <td>Inject 0.25 mg once weekly</td>
+            <td>56 days</td>
+          </tr>
+          <tr>
+            <td>0.25 mg or 0.5 mg</td>
+            <td>Inject 0.25 mg once weekly for 4 weeks, 0.5 mg once weekly for 2 weeks</td>
+            <td>42 days supply</td>
+          </tr>
+          <tr>
+            <td>0.25 mg or 0.5 mg</td>
+            <td>Inject 0.5 mg once weekly</td>
+            <td>28 days supply</td>
+          </tr>
+          <tr>
+            <td>1 mg</td>
+            <td>Inject 1 mg once weekly</td>
+            <td>28 days supply</td>
+          </tr>
+          <tr>
+            <td>2 mg</td>
+            <td>Inject 2 mg once weekly</td>
+            <td>28 days supply</td>
+          </tr>
+        </table>
+      </div>
+      <div id="liraglutide" style="display:none">
+        <table>
+          <tr>
+            <th>Product</th>
+            <th>Directions</th>
+            <th>Quantity</th>
+            <th>Days Supply</th>
+          </tr>
+          <tr>
+            <td>VICTOZA</td>
+            <td>Inject 1.2 mg daily</td>
+            <td>6 mL (2 pens)</td>
+            <td>30 days</td>
+          </tr>
+          <tr>
+            <td>VICTOZA</td>
+            <td>Inject 1.8 mg daily</td>
+            <td>9 mL (3 pens)</td>
+            <td>30 days</td>
+          </tr>
+          <tr>
+            <td>SAXENDA</td>
+            <td>Inject 0.6 mg daily for 1 week, 1.2 mg daily for 1 week, 1.8 mg daily for 1 week, 2.4 mg daily for 1 week, 3 mg daily</td>
+            <td>9 mL (3 pens)</td>
+            <td>32 days</td>
+          </tr>
+          <tr>
+            <td>SAXENDA</td>
+            <td>Inject 3 mg daily</td>
+            <td>15 mL (5 pens)</td>
+            <td>30 days</td>
+          </tr>
+        </table>
+      </div>
+      <div id="ifDevice" style="display:none">
+        <table>
+          <tr>
+            <th>Device Name</th>
+            <th>Package Size</th>
+            <th>Days Supply</th>
+            <th>Change Frequency</th>
+          </tr>
+          <tr>
+            <td>Freestyle Libre 1/2/3</td>
+            <td>1 sensor</td>
+            <td>14 per box</td>
+            <td>Every 14 days</td>
+          </tr>
+          <tr>
+            <td>Dexcom G6 Sensor</td>
+            <td>3 sensors</td>
+            <td>30 per box</td>
+            <td>Every 10 days</td>
+          </tr>
+          <tr>
+            <td>Dexcom G6 Transmitter</td>
+            <td>1 transmitter</td>
+            <td>90 per box</td>
+            <td>Every 90 days</td>
+          </tr>
+          <tr>
+            <td>Dexcom G6 Receiver</td>
+            <td>1 receiver</td>
+            <td>Indefinitely</td>
+            <td>Not applicable</td>
+          </tr>
+          <tr>
+            <td>Dexcom G7 Sensor</td>
+            <td>1 sensor</td>
+            <td>10 per box</td>
+            <td>Every 10 days</td>
+          </tr>
+          <tr>
+            <td>Dexcom G7 Receiver</td>
+            <td>1 receiver</td>
+            <td>Indefinitely</td>
+            <td>Not applicable</td>
+          </tr>
+          <tr>
+            <td>Omnipod Gen 3/4/5</td>
+            <td>5 pods</td>
+            <td>10-15 per box</td>
+            <td>Every 2-3 days</td>
+          </tr>
+        </table>
+      </div>
+      <div id="ifKit" style="display:none">
+        <table>
+          <tr>
+            <th>Brand Name</th>
+            <th>Generic Name</th>
+            <th>Package Size</th>
+            <th>Days Supply</th>
+            <th>Directions</th>
+          </tr>
+          <tr>
+            <td>CHANTIX 0.5 mg /1 mg</td>
+            <td>varenicline</td>
+            <td>53</td>
+            <td>28</td>
+            <td>0.5 mg daily for 3 days, 0.5 mg twice daily for 4 days, 1 mg twice daily for 21 days</td>
+          </tr>
+          <tr>
+            <td>ELIQUIS 5 mg</td>
+            <td>apixaban</td>
+            <td>74</td>
+            <td>30</td>
+            <td>2 tablets twice daily for 7 days, 1 tablet twice daily for 23 days</td>
+          </tr>
+          <tr>
+            <td>MEDROL DOSEPAK 4 mg</td>
+            <td>methylprednisolone</td>
+            <td>21</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>XARELTO 15 mg / 20 mg</td>
+            <td>rivaroxaban</td>
+            <td>51</td>
+            <td>30</td>
+            <td>15 mg twice daily for 21 days, 20 mg daily for 9 days</td>
+          </tr>
+          <tr>
+            <td>Z-PAK 250 mg</td>
+            <td>azithromycin</td>
+            <td>6</td>
+            <td>5</td>
+            <td>2 tablets on day 1 then 1 tablet daily on days 2 to 5</td>
+          </tr>
+        </table>
+      </div>
     </div>
-    </form>
   </body>
 </html>
