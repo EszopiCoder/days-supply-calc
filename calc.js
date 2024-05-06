@@ -252,48 +252,40 @@ function calc() {
       let totalUnits;
       let totalInjML = document.getElementById('injML').value;
       let totalPkgUnits;
-      let pkgML;
       // Calculate total number of units
       switch (document.getElementById('injDrugs').value) {
         case 'u100pen':
           totalPkgUnits = 300;
-          pkgML = 3;
           proof = "("+totalInjML+" mL x 100 units/mL)";
           totalUnits = totalInjML*100;
           break;
         case 'u100vial':
           totalPkgUnits = 1000;
-          pkgML = 10;
           proof = "("+totalInjML+" mL x 100 units/mL)";
           totalUnits = totalInjML*100;
           break;
         case 'u200pen':
           totalPkgUnits = 600;
-          pkgML = 3;
           proof = "("+totalInjML+" mL x 200 units/mL)";
           totalUnits = totalInjML*200;
           break;
         case 'toujeo':
           totalPkgUnits = 450;
-          pkgML = 1.5;
           proof = "("+totalInjML+" mL x 300 units/mL)";
           totalUnits = totalInjML*300;
           break;
         case 'toujeomax':
           totalPkgUnits = 900;
-          pkgML = 3;
           proof = "("+totalInjML+" mL x 300 units/mL)";
           totalUnits = totalInjML*300;
           break;
         case 'u500pen':
           totalPkgUnits = 1500;
-          pkgML = 3;
           proof = "("+totalInjML+" mL x 500 units/mL)";
           totalUnits = totalInjML*500;
           break;
         case 'u500vial':
           totalPkgUnits = 10000;
-          pkgML = 20;
           proof = "("+totalInjML+" mL x 500 units/mL)";
           totalUnits = totalInjML*500;
           break;
@@ -336,10 +328,12 @@ function calc() {
       // Calculate 30 day and 90 day vials/pens
       var monthlyPkg = Math.floor((dailyUnits*30)/totalPkgUnits);
       var quarterlyPkg = Math.floor((dailyUnits*90)/totalPkgUnits);
+      var monthlyML = (monthlyPkg * totalPkgUnits) / (totalUnits / totalInjML);
+      var quarterlyML = (quarterlyPkg * totalPkgUnits) / (totalUnits / totalInjML);
       var monthlyPkgDays = Math.floor(monthlyPkg*totalPkgUnits/dailyUnits);
       var quarterlyPkgDays = Math.floor(quarterlyPkg*totalPkgUnits/dailyUnits);
-      notes = notes+"<br>"+"Nearest 30 day supply: "+monthlyPkg+" vials/pens ("+Number(monthlyPkg*pkgML)+" mL = "+monthlyPkgDays+" days supply)";
-      notes = notes+"<br>"+"Nearest 90 day supply: "+quarterlyPkg+" vials/pens ("+Number(quarterlyPkg*pkgML)+" mL = "+quarterlyPkgDays+" days supply)";
+      notes = notes+"<br>"+"Nearest 30 day supply: "+monthlyPkg+" vials/pens ("+monthlyML+" mL = "+monthlyPkgDays+" days supply)";
+      notes = notes+"<br>"+"Nearest 90 day supply: "+quarterlyPkg+" vials/pens ("+quarterlyML+" mL = "+quarterlyPkgDays+" days supply)";
       // Validate inputs and calculate days supply
       if (isNaN(totalUnits) || totalUnits < 1 || isNaN(dailyUnits) || dailyUnits < 1) {
         document.getElementById('output').innerHTML = "Invalid input(s)";
