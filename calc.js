@@ -256,6 +256,7 @@ function calc() {
       let totalUnits;
       let totalInjML = document.getElementById('injML').value;
       let totalPkgUnits;
+      let validPkg = true;
       // Calculate total number of units
       switch (document.getElementById('injDrugs').value) {
         case 'u100pen':
@@ -292,6 +293,32 @@ function calc() {
           totalPkgUnits = 10000;
           proof = "("+totalInjML+" mL x 500 units/mL)";
           totalUnits = totalInjML*500;
+          break;
+      }
+      // Validate correct package size
+      switch (document.getElementById('injDrugs').value) {
+        case 'u100pen':
+        case 'u200pen':
+        case 'toujeomax':
+        case 'u500pen':
+          if (totalInjML % 3 > 0) {
+            validPkg = false;
+          }
+          break;
+        case 'u100vial':
+          if ((totalInjML % 3)*(totalInjML % 10) > 0) {
+            validPkg = false;
+          }
+          break;
+        case 'toujeo':
+          if (totalInjML % 1.5 > 0) {
+            validPkg = false;
+          }
+          break;
+        case 'u500vial':
+          if (totalInjML % 20 > 0) {
+            validPkg = false;
+          }
           break;
       }
       let dailyUnits = document.getElementById('injIU').value;
@@ -342,6 +369,8 @@ function calc() {
       // Validate inputs and calculate days supply
       if (isNaN(totalUnits) || totalUnits < 1 || isNaN(dailyUnits) || dailyUnits < 1) {
         document.getElementById('output').innerHTML = "Invalid input(s)";
+      } else if (validPkg == false) {
+        document.getElementById('output').innerHTML = "Invalid package size";
       } else if (totalUnits == 169413001) {
         document.getElementById('ozempic').style.display = 'block';
       } else if (totalUnits == 169406012) {
@@ -354,5 +383,17 @@ function calc() {
         document.getElementById('notes').innerHTML = notes;
       }
       break;
+  }
+}
+function copyText() {
+  var result = document.getElementById('proof').innerText+" "+document.getElementById('output').innerText+"\r\n"+document.getElementById('notes').innerText;
+  if (document.getElementById('proof').innerText.length+document.getElementById('output').innerText.length+document.getElementById('notes').innerText.length == 0) {
+    alert('No text found');
+  } else {
+    navigator.clipboard.writeText(result);
+    document.getElementById('copyAlert').innerHTML = 'Text copied!';
+    setTimeout(function() {
+      document.getElementById('copyAlert').innerHTML = '';
+    }, 2000);
   }
 }
