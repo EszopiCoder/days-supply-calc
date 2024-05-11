@@ -28,7 +28,7 @@ label {
   text-align: left;
 }
 
-input[type=text], select {
+input[type=number], select {
   width: 300px;
   margin-left: 400px;
   display: block;
