@@ -78,7 +78,9 @@ Last updated 05/2024
 | --- | --- | --- | --- | --- |
 | CHANTIX 0.5 mg /1 mg | varenicline | 53 | 28 | 0.5 mg daily for 3 days, 0.5 mg twice daily for 4 days, 1 mg twice daily for 21 days |
 | ELIQUIS 5 mg | apixaban | 74 | 30 | 2 tablets twice daily for 7 days, 1 tablet twice daily for 23 days |
-| MEDROL DOSEPAK 4 mg | methylprednisolone | 21 | 6 |  |
+| MEDROL DOSEPAK 4 mg | methylprednisolone | 21 | 6 | 6 tablets, 5 tablets, 4 tablets, 3 tablets, 2 tablets, 1 tablet |
+| DELTASONE 5 mg | prednisone | 48 | 12 | 6 tablets daily for 4 days, 4 tablets daily for 4 days, 2 tablets daily for 4 days |
+| DELTASONE 10 mg | prednisone | 21 | 6 | 6 tablets, 5 tablets, 4 tablets, 3 tablets, 2 tablets, 1 tablet |
 | XARELTO 15 mg / 20 mg | rivaroxaban | 51 | 30 | 15 mg twice daily for 21 days, 20 mg daily for 9 days |
 | Z-PAK 250 mg | azithromycin | 6 | 5 | 2 tablets on day 1 then 1 tablet daily on days 2 to 5 |
 
