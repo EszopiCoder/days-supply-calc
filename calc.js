@@ -1,3 +1,7 @@
+/**
+ * Shows/Hides user inputs for each drug route.
+ * Triggered by onchange event.
+ */
 function onchangeRoute() {
   document.getElementById('proof').innerHTML = "";
   document.getElementById('output').innerHTML = "";
@@ -22,8 +26,13 @@ function onchangeRoute() {
     document.getElementById('ifKit').style.display = 'block';
   }
 }
+/**
+ * Shows/Hides user inputs for each eye/ear drug.
+ * Triggered by onchange event.
+ */
 function onchangeEyeEar() {
   const eyeEarInput = document.getElementById('eyeEarDrugs');
+  // Display appropriate inputs
   if (eyeEarInput.value == 'lotemaxsm' || eyeEarInput.value == 'miebo') {
     document.getElementById('ifEyeEarML').style.display = 'none';
     document.getElementById('ifEyeEarPkg').style.display = 'block';
@@ -32,21 +41,85 @@ function onchangeEyeEar() {
     document.getElementById('ifEyeEarPkg').style.display = 'none';
   }
 }
+/**
+ * Shows/Hides user inputs for each injection drug.
+ * Also changes settings for injML and injIU number inputs.
+ * Triggered by onchange event.
+ */
 function onchangeInj() {
   document.getElementById('ozempic').style.display = 'none';
   document.getElementById('liraglutide').style.display = 'none';
   const injInput = document.getElementById('injDrugs');
+  const totalML = document.getElementById('injML');
+  const dailyUnits = document.getElementById('injIU');
+  // Change settings for injML and injIU number inputs
+  switch (injInput.value) {
+    case 'u100pen':
+    case 'u200pen':
+    case 'toujeomax':
+    case 'u500pen':
+      totalML.value = "3";
+      totalML.step = "3";
+      totalML.min = "3";
+      break;
+    case 'u100vial':
+      totalML.value = "10";
+      totalML.step = "1";
+      totalML.min = "3";
+      break;
+    case 'toujeo':
+      totalML.value = "1.5";
+      totalML.step = "1.5";
+      totalML.min = "1.5";
+      break;
+    case 'u500vial':
+      totalML.value = "20";
+      totalML.step = "20";
+      totalML.min = "20";
+      break;
+  }
+  switch (injInput.value) {
+    case 'u100pen':
+      dailyUnits.value = "1";
+      dailyUnits.step = "0.5";
+      dailyUnits.min = "0.5";
+      break;
+    case 'u200pen':
+    case 'toujeo':
+    case 'u100vial':
+      dailyUnits.value = "1";
+      dailyUnits.step = "1";
+      dailyUnits.min = "1";
+      break;
+    case 'u500pen':
+    case 'u500vial':
+      dailyUnits.value = "5";
+      dailyUnits.step = "5";
+      dailyUnits.min = "5";
+      break;
+    case 'toujeomax':
+      dailyUnits.value = "2";
+      dailyUnits.step = "2";
+      dailyUnits.min = "2";
+      break;
+  }
+  // Display appropriate inputs
   if (injInput.value == 'u100vial' || injInput.value == 'u500vial') {
     document.getElementById('insulin').style.display = 'block';
     document.getElementById('insulinPen').style.display = 'none';
   } else if (injInput.value == 'u100pen' || injInput.value == 'u200pen' || injInput.value == 'toujeo' || injInput.value == 'toujeomax' || injInput.value == 'u500pen') {
     document.getElementById('insulin').style.display = 'block';
     document.getElementById('insulinPen').style.display = 'block';
+    calcPens();
   } else {
     document.getElementById('insulin').style.display = 'none';
     document.getElementById('insulinPen').style.display = 'none';
   }
 }
+/**
+ * Calculates the number of pens and outputs via innerHTML to 'numPens'.
+ * Triggered by onchange event.
+ */
 function calcPens() {
   const totalML = document.getElementById('injML');
   const injInput = document.getElementById('injDrugs');
@@ -60,6 +133,10 @@ function calcPens() {
     }
   }
 }
+/**
+ * Calculates days supply and outputs via innerHTML.
+ * Triggered by onclick event.
+ */
 function calc() {
   var proof = "";
   var output = "";
@@ -385,6 +462,10 @@ function calc() {
       break;
   }
 }
+/**
+ * Copies days supply result and displays alert.
+ * Triggered by onclick event.
+ */
 function copyText() {
   var result = document.getElementById('proof').innerText+" "+document.getElementById('output').innerText+"\r\n"+document.getElementById('notes').innerText;
   if (document.getElementById('proof').innerText.length+document.getElementById('output').innerText.length+document.getElementById('notes').innerText.length == 0) {
