@@ -53,15 +53,15 @@
         </div>
         <div id="ifEyeEarML" style="display:block">
           <label for="EyeEarML">Enter Package Size (mL):</label>
-          <input type="text" id="EyeEarML">
+          <input type="number" id="EyeEarML" name="EyeEarML" min="1" step="0.5" value="5">
         </div>
         <div id="ifEyeEarPkg" style="display:none">
           <label for="EyeEarPkg">Enter # of Packages:</label>
-          <input type="text" id="EyeEarPkg" value="1">
+          <input type="number" id="EyeEarPkg" name="EyeEarPkg" min="1" value="1">
         </div>
         <div>
           <label for="EyeEarGtt">Enter Total Drops per Day:</label>
-          <input type="text" id="EyeEarGtt">
+          <input type="number" id="EyeEarGtt" name="EyeEarGtt" min="1" value="1">
         </div>
         <span>Note: Account for <u>one or both eyes/ears</u> in total drops per day</span>
       </div>
@@ -84,11 +84,11 @@
         </div>
         <div>
           <label for="NosePkg">Enter # of Packages:</label>
-          <input type="text" id="NosePkg" value="1">
+          <input type="number" id="NosePkg" name="NosePkg" min="1" value="1">
         </div>
         <div>
           <label for="NoseSpray">Total Sprays per Day:</label>
-          <input type="text" id="NoseSpray">
+          <input type="number" id="NoseSpray" name="NoseSpray" min="1" value="1">
         </div>
         <span>Note: Account for <u>one or both nostrils</u> in total sprays per day</span>
       </div>
@@ -110,17 +110,17 @@
         <div id="insulin" style="display:block">
           <div>
             <label for="injML">Enter Package Size (mL):</label>
-            <input type="text" id="injML" oninput="calcPens()">
+            <input type="number" id="injML" name="injML" min="3" step="3" value="3" oninput="calcPens()">
           </div>
           <div>
             <label for="injIU">Enter Total Units per Day:</label>
-            <input type="text" id="injIU">
+            <input type="number" id="injIU" name="injIU" min="1" step="0.5" value="10">
           </div>
         </div>
         <div id="insulinPen" style="display:block">
           <div>
             <label for="injFreq">Enter # of Injections per Day:</label>
-            <input type="text" id="injFreq">
+            <input type="number" id="injFreq" name="injFreq" min="1" value="1">
           </div>
           <span>Note: Exclude priming doses from total units per day</span>
           <p id="numPens"></p>
@@ -282,6 +282,21 @@
             <td>methylprednisolone</td>
             <td>21</td>
             <td>6</td>
+            <td>6 tablets, 5 tablets, 4 tablets, 3 tablets, 2 tablets, 1 tablet</td>
+          </tr>
+          <tr>
+            <td>DELTASONE 5 mg</td>
+            <td>prednisone</td>
+            <td>48</td>
+            <td>12</td>
+            <td>6 tablets daily for 4 days, 4 tablets for 4 days, 2 tablets for 4 days</td>
+          </tr>
+          <tr>
+            <td>DELTASONE 10mg</td>
+            <td>prednisone</td>
+            <td>21</td>
+            <td>6</td>
+            <td>6 tablets, 5 tablets, 4 tablets, 3 tablets, 2 tablets, 1 tablet</td>
           </tr>
           <tr>
             <td>XARELTO 15 mg / 20 mg</td>
