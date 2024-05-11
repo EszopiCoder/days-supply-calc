@@ -472,9 +472,11 @@ function copyText() {
     alert('No text found');
   } else {
     navigator.clipboard.writeText(result);
+    document.getElementById('copyAlert').style.display = 'block';
     document.getElementById('copyAlert').innerHTML = 'Text copied!';
     setTimeout(function() {
       document.getElementById('copyAlert').innerHTML = '';
+      document.getElementById('copyAlert').style.display = 'none';
     }, 2000);
   }
 }
