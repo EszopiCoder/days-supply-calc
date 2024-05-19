@@ -45,6 +45,7 @@
             <option value="prolensa">PROLENSA 0.07% (3 mL) [bromfenac sodium]</option>
             <option value="timoptic">TIMOPTIC [timolol maleate]</option>
             <option value="timopticxe">TIMOPTIC XE (5 mL) [timolol maleate gel forming]</option>
+            <option value="vevye">VEVYE 0.1% (2 mL) [cyclosporine]</option>
             <option value="vyzulta">VYZULTA 0.024% [latanoprostene bunod]</option>
             <option value="xalatan">XALATAN 0.005% (2.5 mL) [latanoprost]</option>
             <option value="zirgan">ZIRGAN 0.15% (5 g) [ganciclovir]</option>
@@ -68,7 +69,7 @@
       <div id="ifNose" style="display:none">
         <div>
           <label for="noseDrugs">Select Intranasal Drug:</label>
-          <select id="noseDrugs" name="noseDrugs">
+          <select id="noseDrugs" name="noseDrugs" onchange="onchangeNose()">
             <option value="azelastine">azelastine 0.1% (30 mL)</option>
             <option value="butorphanol">butorphanol 10 mg/mL (2.5 mL)</option>
             <option value="calcitonin">calcitonin salmon 220 USP (3.7 mL)</option>
@@ -264,7 +265,7 @@
             <th>Directions</th>
           </tr>
           <tr>
-            <td>CHANTIX 0.5 mg /1 mg</td>
+            <td>CHANTIX 0.5 mg / 1 mg</td>
             <td>varenicline</td>
             <td>53</td>
             <td>28</td>
