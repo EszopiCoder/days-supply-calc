@@ -28,10 +28,13 @@ function onchangeRoute() {
 }
 /**
  * Shows/Hides user inputs for each eye/ear drug.
+ * Also changes settings for totalML and dailyDrops number inputs.
  * Triggered by onchange event.
  */
 function onchangeEyeEar() {
   const eyeEarInput = document.getElementById('eyeEarDrugs');
+  const totalML = document.getElementById('EyeEarML');
+  const dailyDrops = document.getElementById('EyeEarGtt');
   // Display appropriate inputs
   if (eyeEarInput.value == 'lotemaxsm' || eyeEarInput.value == 'miebo') {
     document.getElementById('ifEyeEarML').style.display = 'none';
@@ -39,6 +42,128 @@ function onchangeEyeEar() {
   } else {
     document.getElementById('ifEyeEarML').style.display = 'block';
     document.getElementById('ifEyeEarPkg').style.display = 'none';
+  }
+  // Change attributes for number inputs per drug if applicable
+  // totalML accounts for package size (if applicable)
+  // dailyDrops changes value to usual dose per package insert (if applicable)
+  switch (eyeEarInput.value) {
+    case 'alrex':
+    case 'cosopt':
+    case 'lotemaxsusp':
+    case 'lotemaxgel':
+    case 'timoptic':
+      totalML.min = "5";
+      totalML.step = "5";
+      totalML.value = "5";
+      dailyDrops.value = "4";
+      break;
+    case 'besivance':
+      totalML.min = "5";
+      totalML.step = "5";
+      totalML.value = "5";
+      dailyDrops.value = "3";
+      break;
+    case 'dexamethasone':
+      totalML.min = "5";
+      totalML.step = "5";
+      totalML.value = "5";
+      dailyDrops.value = "1";
+      break;
+    case 'diclofenac':
+      totalML.min = "2.5";
+      totalML.step = "2.5";
+      totalML.value = "2.5";
+      dailyDrops.value = "4";
+      break;
+    case 'brimonidine':
+    case 'dorzolamide':
+      totalML.min = "5";
+      totalML.step = "5";
+      totalML.value = "5";
+      dailyDrops.value = "6";
+      break;
+    case 'lotemaxsm':
+      dailyDrops.value = "3";
+      break;
+    case 'istalol':
+    case 'lumigan':
+    case 'xalatan':
+    case 'vyzulta':
+      totalML.min = "2.5";
+      totalML.step = "2.5";
+      totalML.value = "2.5";
+      dailyDrops.value = "2";
+      break;
+    case 'miebo':
+      dailyDrops.value = "8";
+      break;
+    case 'prolensa':
+      totalML.min = "3";
+      totalML.step = "3";
+      totalML.value = "3";
+      dailyDrops.value = "1";
+      break;
+    case 'bepreve':
+    case 'levobunolol':
+    case 'timopticxe':
+      totalML.min = "5";
+      totalML.step = "5";
+      totalML.value = "5";
+      dailyDrops.value = "2";
+      break;
+    case 'vevye':
+      totalML.min = "2";
+      totalML.step = "2";
+      totalML.value = "2";
+      dailyDrops.value = "4";
+      break;
+    case 'zirgan':
+      totalML.min = "5";
+      totalML.step = "5";
+      totalML.value = "5";
+      dailyDrops.value = "5";
+      break;
+    case 'zylet':
+      totalML.min = "2.5";
+      totalML.step = "2.5";
+      totalML.value = "2.5";
+      dailyDrops.value = "1";
+      break;
+    default:
+      totalML.min = "1";
+      totalML.step = "0.5";
+      totalML.value = "5";
+      dailyDrops.value = "1";
+  }
+}
+/**
+ * Changes settings for NoseSpray number input.
+ * Triggered by onchange event.
+ */
+function onchangeNose() {
+  const noseInput = document.getElementById('noseDrugs');
+  const dailySprays = document.getElementById('NoseSpray');
+  switch (noseInput.value) {
+    case 'ipra3':
+    case 'ipra6':
+      dailySprays.value = 12;
+      break;
+    case 'ryaltris':
+      dailySprays.value = 8;
+      break;
+    case 'azelastine':
+    case 'dymista':
+    case 'flut50':
+    case 'omnaris':
+      dailySprays.value = 4;
+      break;
+    case 'butorphanol':
+    case 'desmopressin':
+    case 'zetonna':
+      dailySprays.value = 2;
+      break;
+    default:
+      dailySprays.value = 1;
   }
 }
 /**
@@ -155,6 +280,10 @@ function calc() {
         case 'other':
           proof = "("+totalML+" mL x 20 drops/mL)";
           totalDrops = totalML*20;
+          break;
+        case 'vevye':
+          proof = "("+totalML+" mL x 100 drops/mL)";
+          totalDrops = totalML*100;
           break;
         case 'bepreve':
         case 'xalatan':
