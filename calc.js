@@ -534,22 +534,19 @@ function calc() {
         case 'u200pen':
           proof = proof+" / ("+dailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 2 priming units)) =";
           dailyUnits = Number(dailyUnits)+(document.getElementById('injFreq').value*2);
-          notes = "Check room temperature stability of drug if over 28 days supply<br>Mixed insulins have shorter stability at 10-14 days supply";
+          notes = "Check room temperature stability of drug if over 28 days supply<br>Mixed insulins have shorter stability at 10-14 days supply per pen";
           break;
         case 'toujeo':
           proof = proof+" / ("+dailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 3 priming units)) =";
           dailyUnits = Number(dailyUnits)+(document.getElementById('injFreq').value*3);
-          notes = "Check room temperature stability of drug if over 56 days supply";
           break;
         case 'toujeomax':
           proof = proof+" / ("+dailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 4 priming units)) =";
           dailyUnits = Number(dailyUnits)+(document.getElementById('injFreq').value*4);
-          notes = "Check room temperature stability of drug if over 56 days supply";
           break;
         case 'u500pen':
           proof = proof+" / ("+dailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 5 priming units)) =";
           dailyUnits = Number(dailyUnits)+(document.getElementById('injFreq').value*5);
-          notes = "Check room temperature stability of drug if over 28 days supply";
           break;
         case 'ozempic':
           totalUnits = 169413001;
@@ -570,8 +567,6 @@ function calc() {
       var quarterlyML = (quarterlyPkg * totalPkgUnits) / (totalUnits / totalInjML);
       var monthlyPkgDays = Math.floor(monthlyPkg*totalPkgUnits/dailyUnits);
       var quarterlyPkgDays = Math.floor(quarterlyPkg*totalPkgUnits/dailyUnits);
-      notes = notes+"<br>"+"Nearest 30 day supply: "+monthlyPkg+" vials/pens ("+monthlyML+" mL = "+monthlyPkgDays+" days supply)";
-      notes = notes+"<br>"+"Nearest 90 day supply: "+quarterlyPkg+" vials/pens ("+quarterlyML+" mL = "+quarterlyPkgDays+" days supply)";
       // Validate inputs and calculate days supply
       if (isNaN(totalUnits) || totalUnits < 1 || isNaN(dailyUnits) || dailyUnits < 1) {
         document.getElementById('output').innerHTML = "Invalid input(s)";
@@ -584,6 +579,39 @@ function calc() {
       }
       else {
         output = Math.floor(totalUnits / dailyUnits);
+        // Correct days supply based on product stability
+        switch (document.getElementById('injDrugs').value) {
+          case 'u500pen':
+            if (totalInjML/output < 3/28) {
+              output = "<del>"+output+" days supply</del> &rarr; "+totalInjML/3*28
+              notes = "Each pen only lasts for 28 days after first usage";
+            }
+            break;
+          case 'toujeo':
+            if (totalInjML/output < 1.5/56) {
+              output = "<del>"+output+" days supply</del> &rarr; "+totalInjML/1.5*56
+              notes = "Each pen only lasts for 56 days after first usage";
+            }
+            break;
+          case 'toujeomax':
+            if (totalInjML/output < 3/56) {
+              output = "<del>"+output+" days supply</del> &rarr; "+totalInjML/3*56
+              notes = "Each pen only lasts for 56 days after first usage";
+            }
+            break;
+          case 'u500vial':
+            if (totalInjML/output < 20/40) {
+              output = "<del>"+output+" days supply</del> &rarr; "+totalInjML/20*40
+              notes = "Each pen only lasts for 40 days after first usage";
+            }
+            break;
+        }
+        // Add 30 and 90 day calculations if applicable
+        if (monthlyPkg > 0 || quarterlyPkg > 0) {
+          notes = notes+"<br>"+"Nearest 30 day supply: "+monthlyPkg+" vials/pens ("+monthlyML+" mL = "+monthlyPkgDays+" days supply)";
+          notes = notes+"<br>"+"Nearest 90 day supply: "+quarterlyPkg+" vials/pens ("+quarterlyML+" mL = "+quarterlyPkgDays+" days supply)";
+        }
+        // Display results
         document.getElementById('proof').innerHTML = proof;
         document.getElementById('output').innerHTML = output+" days supply";
         document.getElementById('notes').innerHTML = notes;
