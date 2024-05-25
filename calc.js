@@ -1,3 +1,8 @@
+document.addEventListener('keyup', (e) => {
+  if (e.code == 'Enter') {
+    calc();
+  }
+}
 /**
  * Shows/Hides user inputs for each drug route.
  * Triggered by onchange event.
@@ -338,11 +343,11 @@ function calc() {
           totalDrops = totalML*19;
           break;
         case 'miebo':
-          proof = "("+totalPkg+" pkg x 272 drops/mL)";
+          proof = "("+totalPkg+" pkg x 272 drops/pkg)";
           totalDrops = totalPkg*272;
           break;
         case 'lotemaxsm':
-          proof = "("+totalPkg+" pkg x 131 drops/mL)";
+          proof = "("+totalPkg+" pkg x 131 drops/pkg)";
           totalDrops = totalPkg*131;
           break;
       }
