@@ -2,7 +2,7 @@ document.addEventListener('keyup', (e) => {
   if (e.code == 'Enter') {
     calc();
   }
-}
+})
 /**
  * Shows/Hides user inputs for each drug route.
  * Triggered by onchange event.
