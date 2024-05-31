@@ -43,14 +43,23 @@ const arrNoseDrugs = [
 ];
 // [abbreviated drug name (string), drug name (string), pen, mL min, mL step, mL value, units min, units step, units value, insulin concentration, priming units, expiration]
 const arrInsulinDrugs = [
-  ['u100pen','U-100 insulin PEN (3 mL)',true,3,3,3,1,0.5,0.5,100,2,0],
-  ['u100vial3','U-100 insulin VIAL (3 mL)',false,3,3,3,1,1,1,100,0,0],
-  ['u100vial','U-100 insulin VIAL (10 mL)',false,10,10,10,1,1,1,100,0,0],
-  ['u200pen','U-200 insulin PEN (3 mL)',true,3,3,3,1,1,1,200,2,0],
+  ['u100pen','U-100 insulin PEN (3 mL)',true,3,3,3,1,0.5,0.5,100,2,28],
+  ['u100vial3','U-100 insulin VIAL (3 mL)',false,3,3,3,1,1,1,100,0,28],
+  ['u100vial','U-100 insulin VIAL (10 mL)',false,10,10,10,1,1,1,100,0,28],
+  ['u200pen','U-200 insulin PEN (3 mL)',true,3,3,3,1,1,1,200,2,28],
   ['toujeo','U-300 TOUJEO PEN (1.5 mL) [insulin glargine]',true,1.5,1.5,1.5,1,1,1,300,3,56],
   ['toujeomax','U-300 TOUJEO MAX PEN (3 mL) [insulin glargine]',true,3,3,3,2,2,2,300,4,56],
   ['u500pen','U-500 HUMULIN R PEN (3 mL) [insulin human]',true,3,3,3,5,5,5,500,5,28],
-  ['u500vial','U-500 HUMULIN R VIAL (20 mL) [insulin human]',false,20,20,20,5,5,5,500,0,40]
+  ['u500vial','U-500 HUMULIN R VIAL (20 mL) [insulin human]',false,20,20,20,5,5,5,500,0,40],
+  ['humalogmix','U-100 HUMALOG 50/50 or 75/25 MIX PEN (3 mL) [insulin lispro protamine mix]',true,3,3,3,1,1,1,100,2,10],
+  ['humulinvial','U-100 HUMULIN N, R, or 70/30 VIAL (3 mL) [insulin human]',false,3,3,3,1,1,1,100,0,31],
+  ['humulinvial','U-100 HUMULIN N, R, or 70/30 VIAL (10 mL) [insulin human]',false,10,10,10,1,1,1,100,0,31],
+  ['humulinnpen','U-100 HUMULIN N PEN (3 mL) [isophane insulin human]',true,3,3,3,1,1,1,100,2,14],
+  ['humulinmixpen','U-100 HUMULIN 70/30 PEN (3 mL) [isophane insulin human mix]',true,3,3,3,1,1,1,100,2,10],
+  ['novolinvial','U-100 NOVOLIN N, R, or 70/30 VIAL (10 mL) [insulin human]',false,10,10,10,1,1,1,100,0,42],
+  ['novologmixpen','U-100 NOVOLIN 70/30 PEN (3 mL) [insulin aspart protamine mix]',true,3,3,3,1,1,1,100,2,14],
+  ['tresiba100pen','U-100 TRESIBA PEN (3 mL) [insulin degludec]',true,3,3,3,1,1,1,100,2,56],
+  ['tresiba200pen','U-200 TRESIBA PEN (3 mL) [insulin degludec]',true,3,3,3,1,1,1,200,2,56]
 ];
 // [abbreviated drug name (string), drug name (string), [[table header],[table row],...]]
 const arrInjDrugs = [
