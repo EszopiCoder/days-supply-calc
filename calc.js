@@ -1,3 +1,96 @@
+// [abbreviated drug name (string), drug name (string), total dose by pkg (boolean), mL min, mL step, mL value, daily drops value, drops per mL/pkg,[primary mfg name, primary mfg ndc, [[mfg name, drops per mL],[mfg name 2, drops per mL 2],...]],expiration in days]
+const arrEyeEarDrugs = [
+  ['other','Other',false,1,0.5,5,1,20],
+  ['alrex','ALREX 0.2% [loteprednol etabonate]',false,5,5,5,4,32,['Bausch & Lomb brand','(NDC: 24208)',[['Bausch & Lomb generic (NDC: 82260):',31],['Other generics:',20]]]],
+  ['atropine','atropine 1%',false,1,0.5,5,1,31,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['bepreve','BEPREVE 1.5% [bepotastine]',false,5,5,5,2,33,['Bausch & Lomb brand/generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['besivance','BESIVANCE 0.6% [besifloxacin]',false,5,5,5,3,31],
+  ['brimonidine','brimonidine 0.2%',false,5,5,5,6,30,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['cyclopentolate','cyclopentolate 1%',false,1,0.5,5,1,31,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['dexamethasone','dexamethasone 0.1%',false,5,5,5,1,31,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['diclofenac','diclofenac sod 0.1%',false,2.5,2.5,2.5,4,28,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['dorzolamide','dorzolamide sod 2%',false,5,5,5,6,28,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['cosopt','COSOPT 2% / 0.5% [dorzolamide sod / timolol maleate]',false,5,5,5,4,28,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['istalol','ISTALOL 0.5% [timolol maleate]',false,2.5,2.5,2.5,2,32,['Bausch & Lomb brand','(NDC: 24208)',[['Other generics:',20]]]],
+  ['levobunolol','levobunolol 0.5%',false,5,5,5,2,32,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['lotemaxsusp','LOTEMAX 0.5% susp [loteprednol etabonate]',false,5,5,5,4,31,['Bausch & Lomb brand','(NDC: 24208)',[['Other generics:',20]]]],
+  ['lotemaxgel','LOTEMAX 0.5% gel (5 g) [loteprednol etabonate]',false,5,5,5,4,25,['Bausch & Lomb brand/generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['lotemaxsm','LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]',true,1,0.5,5,3,131],
+  ['lumigan','LUMIGAN 0.01% [bimatoprost]',false,2.5,2.5,2.5,2,24,['Allergan brand','(NDC: 00023)',[['Other generics:',20]]]],
+  ['miebo','MIEBO 1.3 GM/mL (3 mL) [perfluorohexyloctane]',true,1,0.5,5,8,272],
+  ['prolensa','PROLENSA 0.07% (3 mL) [bromfenac sodium]',false,3,3,3,1,19,['Bausch & Lomb brand','(NDC: 24208)',[['Bausch & Lomb generic (NDC: 82260):',21],['Other generics:',20]]]],
+  ['timoptic','TIMOPTIC [timolol maleate]',false,5,5,5,4,32,['Bausch & Lomb brand/generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['timopticxe','TIMOPTIC XE (5 mL) [timolol maleate gel forming]',false,5,5,5,2,29,['Bausch & Lomb brand/generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
+  ['vevye','VEVYE 0.1% (2 mL) [cyclosporine]',false,2,2,2,4,100],
+  ['vyzulta','VYZULTA 0.024% [latanoprostene bunod]',false,2.5,2.5,2.5,2,32,null,56],
+  ['xalatan','XALATAN 0.005% (2.5 mL) [latanoprost]',false,2.5,2.5,2.5,2,33,['Pfizer brand','(NDC: 00013)',[['Bausch & Lomb (NDC: 24208):',36],['Greenstone (NDC: 59762):',20],['Sandoz (NDC: 61314):',35],['Somerset (NDC: 70069):',50]]],42],
+  ['zirgan','ZIRGAN 0.15% (5 g) [ganciclovir]',false,5,5,5,5,27],
+  ['zylet','ZYLET 0.5% / 0.3% [loteprednol etabonate / tobramycin]',false,2.5,2.5,2.5,1,32]
+];
+// [abbreviated drug name (string), drug name (string), daily sprays value, sprays per package]
+const arrNoseDrugs = [
+  ['azelastine','azelastine 0.1% (30 mL)',4,200],
+  ['butorphanol','butorphanol 10 mg/mL (2.5 mL)',2,14],
+  ['calcitonin','calcitonin salmon 220 USP (3.7 mL)',1,30],
+  ['desmopressin','desmopressin 0.01% (5 mL)',2,50],
+  ['dymista','DYMISTA 137 mcg / 50 mcg (23 g) [azelastine / fluticasone]',4,120],
+  ['flut50','FLONASE 50 mcg (16g) [fluticasone]',4,120],
+  ['ipra3','ipratropium 0.03% (30 mL)',12,345],
+  ['ipra6','ipratropium 0.06% (15 mL)',12,165],
+  ['ryaltris','RYALTRIS 665 mcg / 25 mcg (29 g) [olopatadine / mometasone]',8,240],
+  ['omnaris','OMNARIS 50 mcg (12.5 g) [ciclesonide]',4,120],
+  ['zetonna','ZETONNA 37 mcg (6.1 g) [ciclesonide]',2,60]
+];
+// [abbreviated drug name (string), drug name (string), pen, mL min, mL step, mL value, units min, units step, units value, insulin concentration, priming units, expiration]
+const arrInsulinDrugs = [
+  ['u100pen','U-100 insulin PEN (3 mL)',true,3,3,3,1,0.5,0.5,100,2,0],
+  ['u100vial3','U-100 insulin VIAL (3 mL)',false,3,3,3,1,1,1,100,0,0],
+  ['u100vial','U-100 insulin VIAL (10 mL)',false,10,10,10,1,1,1,100,0,0],
+  ['u200pen','U-200 insulin PEN (3 mL)',true,3,3,3,1,1,1,200,2,0],
+  ['toujeo','U-300 TOUJEO PEN (1.5 mL) [insulin glargine]',true,1.5,1.5,1.5,1,1,1,300,3,56],
+  ['toujeomax','U-300 TOUJEO MAX PEN (3 mL) [insulin glargine]',true,3,3,3,2,2,2,300,4,56],
+  ['u500pen','U-500 HUMULIN R PEN (3 mL) [insulin human]',true,3,3,3,5,5,5,500,5,28],
+  ['u500vial','U-500 HUMULIN R VIAL (20 mL) [insulin human]',false,20,20,20,5,5,5,500,0,40]
+];
+// [abbreviated drug name (string), drug name (string), [[table header],[table row],...]]
+const arrInjDrugs = [
+  ['ozempic','OZEMPIC (3 mL) [semaglutide]',[['Strength','Directions','Days Supply'],['0.25 mg or 0.5 mg','Inject 0.25 mg once weekly','56 days'],['0.25 mg or 0.5 mg','Inject 0.25 mg once weekly for 4 weeks, 0.5 mg once weekly for 2 weeks','42 days'],['0.25 mg or 0.5 mg','Inject 0.5 mg once weekly','28 days'],['1 mg','Inject 1 mg once weekly','28 days'],['2 mg','Inject 2 mg once weekly','28 days']]],
+  ['liraglutide','VICTOZA or SAXENDA (3 mL) [liraglutide]',[['Product','Directions','Quantity','Days Supply'],['VICTOZA','Inject 1.2 mg daily','6 mL (2 pens)','30 days'],['VICTOZA','Inject 1.8 mg daily','9 mL (3 pens)','30 days'],['SAXENDA','Inject 0.6 mg daily for 1 week, 1.2 mg daily for 1 week, 1.8 mg daily for 1 week, 2.4 mg daily for 1 week, 3 mg daily','9 mL (3 pens)','32 days'],['SAXENDA','Inject 3 mg daily','15 mL (5 pens)','30 days']]]
+];
+window.onload = function() {
+  addDrugs();
+}
+function addDrugs() {
+  // Add eye/ear drugs
+  for (let i = 0; i < arrEyeEarDrugs.length; i++) {
+    let eyeEarDrugs = document.createElement('option');
+    eyeEarDrugs.value = i;
+    eyeEarDrugs.innerHTML = arrEyeEarDrugs[i][1];
+    document.getElementById('eyeEarDrugs').append(eyeEarDrugs);
+  }
+  // Add nasal drugs
+  for (let j = 0; j < arrNoseDrugs.length; j++) {
+    let noseDrugs = document.createElement('option');
+    noseDrugs.value = j;
+    noseDrugs.innerHTML = arrNoseDrugs[j][1];
+    document.getElementById('noseDrugs').append(noseDrugs);
+  }
+  // Add injection (insulin) drugs
+  for (let k = 0; k < arrInsulinDrugs.length; k++) {
+    let insulinDrugs = document.createElement('option');
+    insulinDrugs.value = k;
+    insulinDrugs.innerHTML = arrInsulinDrugs[k][1];
+    document.getElementById('insulinDrugs').append(insulinDrugs);
+  }
+  // Add injection (non-insulin) drugs
+  for (let l = 0; l < arrInjDrugs.length; l++) {
+    let injDrugs = document.createElement('option');
+    injDrugs.value = l;
+    injDrugs.innerHTML = arrInjDrugs[l][1];
+    document.getElementById('injDrugs').append(injDrugs);
+  }
+}
+// Run calc() function if enter button is pressed
 document.addEventListener('keyup', (e) => {
   if (e.code == 'Enter') {
     calc();
@@ -13,9 +106,8 @@ function onchangeRoute() {
   document.getElementById('notes').innerHTML = "";
   document.getElementById('ifEyeEar').style.display = 'none';
   document.getElementById('ifNose').style.display = 'none';
+  document.getElementById('ifInsulin').style.display = 'none';
   document.getElementById('ifInj').style.display = 'none';
-  document.getElementById('ozempic').style.display = 'none';
-  document.getElementById('liraglutide').style.display = 'none';
   document.getElementById('ifDevice').style.display = 'none';
   document.getElementById('ifKit').style.display = 'none';
   const routeInput = document.getElementById('route');
@@ -23,6 +115,8 @@ function onchangeRoute() {
     document.getElementById('ifEyeEar').style.display = 'block';
   } else if (routeInput.value == 'Nose') {
     document.getElementById('ifNose').style.display = 'block';
+  } else if (routeInput.value == 'Insulin') {
+    document.getElementById('ifInsulin').style.display = 'block';
   } else if (routeInput.value == 'Inj') {
     document.getElementById('ifInj').style.display = 'block';
   } else if (routeInput.value == 'Device') {
@@ -37,11 +131,11 @@ function onchangeRoute() {
  * Triggered by onchange event.
  */
 function onchangeEyeEar() {
-  const eyeEarInput = document.getElementById('eyeEarDrugs');
+  const eyeEarInput = document.getElementById('eyeEarDrugs').value;
   const totalML = document.getElementById('EyeEarML');
   const dailyDrops = document.getElementById('EyeEarGtt');
   // Display appropriate inputs
-  if (eyeEarInput.value == 'lotemaxsm' || eyeEarInput.value == 'miebo') {
+  if (arrEyeEarDrugs[eyeEarInput][2] == true) {
     document.getElementById('ifEyeEarML').style.display = 'none';
     document.getElementById('ifEyeEarPkg').style.display = 'block';
   } else {
@@ -51,215 +145,60 @@ function onchangeEyeEar() {
   // Change attributes for number inputs per drug if applicable
   // totalML accounts for package size (if applicable)
   // dailyDrops changes value to usual dose per package insert (if applicable)
-  switch (eyeEarInput.value) {
-    case 'alrex':
-    case 'cosopt':
-    case 'lotemaxsusp':
-    case 'lotemaxgel':
-    case 'timoptic':
-      totalML.min = "5";
-      totalML.step = "5";
-      totalML.value = "5";
-      dailyDrops.value = "4";
-      break;
-    case 'besivance':
-      totalML.min = "5";
-      totalML.step = "5";
-      totalML.value = "5";
-      dailyDrops.value = "3";
-      break;
-    case 'dexamethasone':
-      totalML.min = "5";
-      totalML.step = "5";
-      totalML.value = "5";
-      dailyDrops.value = "1";
-      break;
-    case 'diclofenac':
-      totalML.min = "2.5";
-      totalML.step = "2.5";
-      totalML.value = "2.5";
-      dailyDrops.value = "4";
-      break;
-    case 'brimonidine':
-    case 'dorzolamide':
-      totalML.min = "5";
-      totalML.step = "5";
-      totalML.value = "5";
-      dailyDrops.value = "6";
-      break;
-    case 'lotemaxsm':
-      dailyDrops.value = "3";
-      break;
-    case 'istalol':
-    case 'lumigan':
-    case 'xalatan':
-    case 'vyzulta':
-      totalML.min = "2.5";
-      totalML.step = "2.5";
-      totalML.value = "2.5";
-      dailyDrops.value = "2";
-      break;
-    case 'miebo':
-      dailyDrops.value = "8";
-      break;
-    case 'prolensa':
-      totalML.min = "3";
-      totalML.step = "3";
-      totalML.value = "3";
-      dailyDrops.value = "1";
-      break;
-    case 'bepreve':
-    case 'levobunolol':
-    case 'timopticxe':
-      totalML.min = "5";
-      totalML.step = "5";
-      totalML.value = "5";
-      dailyDrops.value = "2";
-      break;
-    case 'vevye':
-      totalML.min = "2";
-      totalML.step = "2";
-      totalML.value = "2";
-      dailyDrops.value = "4";
-      break;
-    case 'zirgan':
-      totalML.min = "5";
-      totalML.step = "5";
-      totalML.value = "5";
-      dailyDrops.value = "5";
-      break;
-    case 'zylet':
-      totalML.min = "2.5";
-      totalML.step = "2.5";
-      totalML.value = "2.5";
-      dailyDrops.value = "1";
-      break;
-    default:
-      totalML.min = "1";
-      totalML.step = "0.5";
-      totalML.value = "5";
-      dailyDrops.value = "1";
-  }
+  totalML.min = arrEyeEarDrugs[eyeEarInput][3];
+  totalML.step = arrEyeEarDrugs[eyeEarInput][4];
+  totalML.value = arrEyeEarDrugs[eyeEarInput][5];
+  dailyDrops.value = arrEyeEarDrugs[eyeEarInput][6];
 }
 /**
  * Changes settings for NoseSpray number input.
  * Triggered by onchange event.
  */
 function onchangeNose() {
-  const noseInput = document.getElementById('noseDrugs');
-  const dailySprays = document.getElementById('NoseSpray');
-  switch (noseInput.value) {
-    case 'ipra3':
-    case 'ipra6':
-      dailySprays.value = 12;
-      break;
-    case 'ryaltris':
-      dailySprays.value = 8;
-      break;
-    case 'azelastine':
-    case 'dymista':
-    case 'flut50':
-    case 'omnaris':
-      dailySprays.value = 4;
-      break;
-    case 'butorphanol':
-    case 'desmopressin':
-    case 'zetonna':
-      dailySprays.value = 2;
-      break;
-    default:
-      dailySprays.value = 1;
-  }
+  const noseInput = document.getElementById('noseDrugs').value;
+  const dailySprays = document.getElementById('NoseSpray').value;
+  dailySprays = arrNoseDrugs[noseInput][2];
 }
 /**
  * Shows/Hides user inputs for each injection drug.
- * Also changes settings for injML and injIU number inputs.
+ * Also changes settings for insulinML and insulinIU number inputs.
  * Triggered by onchange event.
  */
-function onchangeInj() {
-  document.getElementById('ozempic').style.display = 'none';
-  document.getElementById('liraglutide').style.display = 'none';
-  const injInput = document.getElementById('injDrugs');
-  const totalML = document.getElementById('injML');
-  const dailyUnits = document.getElementById('injIU');
-  // Change settings for injML and injIU number inputs
-  switch (injInput.value) {
-    case 'u100pen':
-    case 'u200pen':
-    case 'toujeomax':
-    case 'u500pen':
-      totalML.value = "3";
-      totalML.step = "3";
-      totalML.min = "3";
-      break;
-    case 'u100vial':
-      totalML.value = "10";
-      totalML.step = "1";
-      totalML.min = "3";
-      break;
-    case 'toujeo':
-      totalML.value = "1.5";
-      totalML.step = "1.5";
-      totalML.min = "1.5";
-      break;
-    case 'u500vial':
-      totalML.value = "20";
-      totalML.step = "20";
-      totalML.min = "20";
-      break;
-  }
-  switch (injInput.value) {
-    case 'u100pen':
-      dailyUnits.value = "1";
-      dailyUnits.step = "0.5";
-      dailyUnits.min = "0.5";
-      break;
-    case 'u200pen':
-    case 'toujeo':
-    case 'u100vial':
-      dailyUnits.value = "1";
-      dailyUnits.step = "1";
-      dailyUnits.min = "1";
-      break;
-    case 'u500pen':
-    case 'u500vial':
-      dailyUnits.value = "5";
-      dailyUnits.step = "5";
-      dailyUnits.min = "5";
-      break;
-    case 'toujeomax':
-      dailyUnits.value = "2";
-      dailyUnits.step = "2";
-      dailyUnits.min = "2";
-      break;
-  }
+function onchangeInsulin() {
+  const insulinInput = document.getElementById('insulinDrugs').value;
+  const totalML = document.getElementById('insulinML');
+  const dailyUnits = document.getElementById('insulinIU');
+  // Change settings for insulinML and insulinIU number inputs
+  totalML.min = arrInsulinDrugs[insulinInput][3];
+  totalML.step = arrInsulinDrugs[insulinInput][4];
+  totalML.value = arrInsulinDrugs[insulinInput][5];
+  dailyUnits.min = arrInsulinDrugs[insulinInput][6];
+  dailyUnits.step = arrInsulinDrugs[insulinInput][7];
+  dailyUnits.value = arrInsulinDrugs[insulinInput][8];
   // Display appropriate inputs
-  if (injInput.value == 'u100vial' || injInput.value == 'u500vial') {
-    document.getElementById('insulin').style.display = 'block';
-    document.getElementById('insulinPen').style.display = 'none';
-  } else if (injInput.value == 'u100pen' || injInput.value == 'u200pen' || injInput.value == 'toujeo' || injInput.value == 'toujeomax' || injInput.value == 'u500pen') {
+  if (arrInsulinDrugs[insulinInput][2] == true) {
     document.getElementById('insulin').style.display = 'block';
     document.getElementById('insulinPen').style.display = 'block';
-    calcPens();
   } else {
-    document.getElementById('insulin').style.display = 'none';
+    document.getElementById('insulin').style.display = 'block';
     document.getElementById('insulinPen').style.display = 'none';
   }
+  calcPkg();
 }
 /**
- * Calculates the number of pens and outputs via innerHTML to 'numPens'.
+ * Calculates the number of pens and outputs via innerHTML to 'numPkg'.
  * Triggered by onchange event.
  */
-function calcPens() {
-  const totalML = document.getElementById('injML');
-  const injInput = document.getElementById('injDrugs');
+function calcPkg() {
+  const totalML = document.getElementById('insulinML');
+  const insulinInput = document.getElementById('insulinDrugs').value;
   if (isNaN(totalML.value) || totalML.value == 0) {
-      document.getElementById('numPens').innerHTML = "Invalid package size";
+      document.getElementById('numPkg').innerHTML = "Invalid package size";
   } else {
-    if (injInput.value == 'u100pen' || injInput.value == 'u200pen' || injInput.value == 'toujeomax' || injInput.value == 'u500pen') {
-      document.getElementById('numPens').innerHTML = totalML.value+" mL / 3 mL pen = "+totalML.value / 3+" pen(s)";
-    } else if (injInput.value == 'toujeo')  {
-      document.getElementById('numPens').innerHTML = totalML.value+" mL / 1.5 mL pen = "+totalML.value / 1.5+" pen(s)";
+    if (arrInsulinDrugs[insulinInput][2] == true) {
+      document.getElementById('numPkg').innerHTML = totalML.value+" mL / "+arrInsulinDrugs[insulinInput][3]+" mL pen = "+totalML.value / arrInsulinDrugs[insulinInput][3]+" pen(s)";
+    } else {
+      document.getElementById('numPkg').innerHTML = totalML.value+" mL / "+arrInsulinDrugs[insulinInput][3]+" mL vial = "+totalML.value / arrInsulinDrugs[insulinInput][3]+" vial(s)";
     }
   }
 }
@@ -268,140 +207,43 @@ function calcPens() {
  * Triggered by onclick event.
  */
 function calc() {
-  var proof = "";
-  var output = "";
-  var notes = "";
-  document.getElementById('proof').innerHTML = '';
+  document.getElementById('proof').innerHTML='';
   document.getElementById('output').innerHTML = '';
   document.getElementById('notes').innerHTML = '';
+  let proof = '';
+  let output = '';
+  let notes = '';
   switch (document.getElementById('route').value) {
     case 'EyeEar':
+      const eyeEarInput = document.getElementById('eyeEarDrugs').value;
+      const totalML = document.getElementById('EyeEarML').value;
+      const totalPkg = document.getElementById('EyeEarPkg').value;
+      const dailyDrops = document.getElementById('EyeEarGtt').value;
       let totalDrops;
-      let totalML = document.getElementById('EyeEarML').value;
-      let totalPkg = document.getElementById('EyeEarPkg').value;
-      let dailyDrops = document.getElementById('EyeEarGtt').value;
       // Calculate total number of drops
-      switch (document.getElementById('eyeEarDrugs').value) {
-        case 'other':
-          proof = "("+totalML+" mL x 20 drops/mL)";
-          totalDrops = totalML*20;
-          break;
-        case 'vevye':
-          proof = "("+totalML+" mL x 100 drops/mL)";
-          totalDrops = totalML*100;
-          break;
-        case 'bepreve':
-        case 'xalatan':
-          proof = "("+totalML+" mL x 33 drops/mL)";
-          totalDrops = totalML*33;
-          break;
-        case 'alrex':
-        case 'istalol':
-        case 'levobunolol':
-        case 'timoptic':
-        case 'vyzulta':
-        case 'zylet':
-          proof = "("+totalML+" mL x 32 drops/mL)";
-          totalDrops = totalML*32;
-          break;
-        case 'atropine':
-        case 'besivance':
-        case 'cyclopentolate':
-        case 'dexamethasone':
-        case 'lotemaxsusp':
-          proof = "("+totalML+" mL x 31 drops/mL)";
-          totalDrops = totalML*31;
-          break;
-        case 'brimonidine':
-          proof = "("+totalML+" mL x 30 drops/mL)";
-          totalDrops = totalML*30;
-          break;
-        case 'timopticxe':
-          proof = "("+totalML+" mL x 29 drops/mL)";
-          totalDrops = totalML*29;
-          break;
-        case 'diclofenac':
-        case 'dorzolamide':
-        case 'cosopt':
-          proof = "("+totalML+" mL x 28 drops/mL)";
-          totalDrops = totalML*28;
-          break;
-        case 'zirgan':
-          proof = "("+totalML+" mL x 27 drops/mL)";
-          totalDrops = totalML*27;
-          break;
-        case 'lotemaxgel':
-          proof = "("+totalML+" mL x 25 drops/mL)";
-          totalDrops = totalML*25;
-          break;
-        case 'lumigan':
-          proof = "("+totalML+" mL x 24 drops/mL)";
-          totalDrops = totalML*24;
-          break;
-        case 'prolensa':
-          proof = "("+totalML+" mL x 19 drops/mL)";
-          totalDrops = totalML*19;
-          break;
-        case 'miebo':
-          proof = "("+totalPkg+" pkg x 272 drops/pkg)";
-          totalDrops = totalPkg*272;
-          break;
-        case 'lotemaxsm':
-          proof = "("+totalPkg+" pkg x 131 drops/pkg)";
-          totalDrops = totalPkg*131;
-          break;
+      if (arrEyeEarDrugs[eyeEarInput][2] == true) {
+        proof = "("+totalPkg+" pkg x "+arrEyeEarDrugs[eyeEarInput][7]+" drops/pkg)";
+        totalDrops = totalPkg*arrEyeEarDrugs[eyeEarInput][7];
+      } else {
+        proof = "("+totalML+" mL x "+arrEyeEarDrugs[eyeEarInput][7]+" drops/mL)";
+        totalDrops = totalML*arrEyeEarDrugs[eyeEarInput][7];
       }
       // Validate inputs and calculate days supply
       if (isNaN(totalDrops) || totalDrops < 1 || isNaN(dailyDrops) || dailyDrops < 1) {
         document.getElementById('output').innerHTML = "Invalid input(s)"
       } else {
         output = Math.floor(totalDrops / dailyDrops);
-        proof = proof+" / "+dailyDrops+" drops per day =";
+        proof += " / "+dailyDrops+" drops per day =";
         // Add notes to specific drugs
         let standardDrops = Math.floor((totalML*20)/dailyDrops);
-        switch (document.getElementById('eyeEarDrugs').value) {
-          case 'atropine':
-          case 'brimonidine':
-          case 'cyclopentolate':
-          case 'dexamethasone':
-          case 'diclofenac':
-          case 'dexamethasone':
-          case 'diclofenac':
-          case 'dorzolamide':
-          case 'cosopt':
-          case 'levobunolol':
-            notes = "Days supply calculation only applies to <u>Bausch & Lomb generic</u> (NDC: 24208 or 82260)<br>Use the following calculation for other manufacturers:<br>("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
-            break;
-          case 'bepreve':
-          case 'lotemaxgel':
-          case 'timoptic':
-          case 'timopticxe':
-            notes = "Days supply calculation only applies to <u>Bausch & Lomb brand/generic</u> (NDC: 24208 or 82260)<br>Use the following calculation for other manufacturers:<br>("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
-            break;
-          case 'istalol':
-          case 'lotemaxsusp':
-            notes = "Days supply calculation only applies to <u>Bausch & Lomb brand</u> (NDC: 24208 or 82260)<br>Use the following calculation for other manufacturers:<br>("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
-            break;
-          case 'lumigan':
-            notes = "Days supply calculation only applies to <u>Allergan brand</u> (NDC: 00023)<br>Use the following calculation for other manufacturers:<br>("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
-            break;
-          case 'alrex':
-            notes = "Days supply calculation only applies to <u>Bausch & Lomb brand</u> (NDC: 24208)<br>Use the following calculation for other manufacturers:<br>Bausch & Lomb generic (NDC: 82260): ("+totalML+" mL x 31 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*31)/dailyDrops))+" days supply<br>Other generics: ("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
-            break;
-          case 'prolensa':
-            notes = "Days supply calculation only applies to <u>Bausch & Lomb brand</u> (NDC: 24208 or 82260)<br>Use the following calculation for other manufacturers:<br>Bausch & Lomb generic (NDC: 82260): ("+totalML+" mL x 21 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*21)/dailyDrops))+" days supply<br>Other generics: ("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply";
-            break;
-          case 'xalatan':
-            if (Number((totalML*50)/dailyDrops) > 42) {
-              notes = "<b>Expires 42 days after opening</b><br>";
-            }
-            notes = notes+"Days supply calculation only applies to <u>Pfizer brand</u> (NDC: 00013)<br>Use the following calculation for other manufacturers:<br>Bausch & Lomb (NDC: 24208): ("+totalML+" mL x 36 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*36)/dailyDrops))+" days supply<br>Greenstone (NDC: 59762): ("+totalML+" mL x 20 drops/mL) / "+dailyDrops+" = "+standardDrops+" days supply<br>Sandoz (NDC: 61314): ("+totalML+" mL x 35 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*35)/dailyDrops))+" days supply<br>Somerset (NDC: 70069): ("+totalML+" mL x 50 drops/mL) / "+dailyDrops+" = "+Math.floor(Number((totalML*50)/dailyDrops))+" days supply";
-            break;
-          case 'vyzulta':
-            if (output > 56) {
-              notes = "<b>Expires 56 days after opening</b>";
-            }
-            break;
+        if (arrEyeEarDrugs[eyeEarInput][8] != null) {
+          notes = "Days supply calculation only applies to <u>"+arrEyeEarDrugs[eyeEarInput][8][0]+"</u> "+arrEyeEarDrugs[eyeEarInput][8][1]+"<br>Use the following calculation for other manufacturers:";
+          for (let j = 0; j < arrEyeEarDrugs[eyeEarInput][8][2].length; j++) {
+            notes += "<br>"+arrEyeEarDrugs[eyeEarInput][8][2][j][0]+" ("+totalML+" mL x "+arrEyeEarDrugs[eyeEarInput][8][2][j][1]+" drops/mL) / "+dailyDrops+" = "+Math.floor(totalML*arrEyeEarDrugs[eyeEarInput][8][2][j][1]/dailyDrops)+" days supply";
+          }
+        }
+        if (arrEyeEarDrugs[eyeEarInput][9] != null) {
+          notes += "<br><b>Expires "+arrEyeEarDrugs[eyeEarInput][9]+" days after opening</b>"
         }
         document.getElementById('proof').innerHTML = proof;
         document.getElementById('output').innerHTML = output+" days supply";
@@ -409,167 +251,50 @@ function calc() {
       }
       break;
     case 'Nose':
+      const noseInput = document.getElementById('noseDrugs').value;
+      const totalNosePkg = document.getElementById('NosePkg').value;
+      const dailySprays = document.getElementById('NoseSpray').value;
       let totalSprays;
-      let totalNosePkg = document.getElementById('NosePkg').value;
-      let dailySprays = document.getElementById('NoseSpray').value;
       // Calculate total number of sprays
-      switch (document.getElementById('noseDrugs').value) {
-        case 'ipra3':
-          proof = "("+totalNosePkg+" pkg x 345 sprays/pkg)";
-          totalSprays = totalNosePkg*345;
-          break;
-        case 'ryaltris':
-          proof = "("+totalNosePkg+" pkg x 240 sprays/pkg)";
-          totalSprays = totalNosePkg*240;
-          break;
-        case 'azelastine':
-          proof = "("+totalNosePkg+" pkg x 200 sprays/pkg)";
-          totalSprays = totalNosePkg*200;
-          break;
-        case 'ipra6':
-          proof = "("+totalNosePkg+" pkg x 165 sprays/pkg)";
-          totalSprays = totalNosePkg*165;
-          break;
-        case 'dymista':
-        case 'flut50':
-        case 'omnaris':
-          proof = "("+totalNosePkg+" pkg x 120 sprays/pkg)";
-          totalSprays = totalNosePkg*120;
-          break;
-        case 'zetonna':
-          proof = "("+totalNosePkg+" pkg x 60 sprays/pkg)";
-          totalSprays = totalNosePkg*60;
-          break;
-        case 'desmopressin':
-          proof = "("+totalNosePkg+" pkg x 50 sprays/pkg)";
-          totalSprays = totalNosePkg*50;
-          break;
-        case 'calcitonin':
-          proof = "("+totalNosePkg+" pkg x 30 sprays/pkg)";
-          totalSprays = totalNosePkg*30;
-          break;
-        case 'butorphanol':
-          proof = "("+totalNosePkg+" pkg x 14 sprays/pkg)";
-          totalSprays = totalNosePkg*14;
-          break;
-      }
+      proof = "("+totalNosePkg+" pkg x "+arrNoseDrugs[noseInput][3]+" sprays/pkg)";
+      totalSprays = totalNosePkg*arrNoseDrugs[noseInput][3];
       // Validate inputs and calculate days supply
       if (isNaN(totalSprays) || totalSprays < 1) {
         document.getElementById('output').innerHTML = "Invalid input(s)"
       } else {
         output = Math.floor(totalSprays / dailySprays);
-        proof = proof+" / "+dailySprays+" sprays per day = ";
+        proof += " / "+dailySprays+" sprays per day = ";
         document.getElementById('proof').innerHTML = proof;
         document.getElementById('output').innerHTML = output+" days supply";
       }
       break;
-    case 'Inj':
+    case 'Insulin':
+      const insulinInput = document.getElementById('insulinDrugs').value;
+      const totalInsulinML = document.getElementById('insulinML').value;
+      let dailyUnits = document.getElementById('insulinIU').value;
       let totalUnits;
-      let totalInjML = document.getElementById('injML').value;
       let totalPkgUnits;
       let validPkg = true;
       // Calculate total number of units
-      switch (document.getElementById('injDrugs').value) {
-        case 'u100pen':
-          totalPkgUnits = 300;
-          proof = "("+totalInjML+" mL x 100 units/mL)";
-          totalUnits = totalInjML*100;
-          break;
-        case 'u100vial':
-          totalPkgUnits = 1000;
-          proof = "("+totalInjML+" mL x 100 units/mL)";
-          totalUnits = totalInjML*100;
-          break;
-        case 'u200pen':
-          totalPkgUnits = 600;
-          proof = "("+totalInjML+" mL x 200 units/mL)";
-          totalUnits = totalInjML*200;
-          break;
-        case 'toujeo':
-          totalPkgUnits = 450;
-          proof = "("+totalInjML+" mL x 300 units/mL)";
-          totalUnits = totalInjML*300;
-          break;
-        case 'toujeomax':
-          totalPkgUnits = 900;
-          proof = "("+totalInjML+" mL x 300 units/mL)";
-          totalUnits = totalInjML*300;
-          break;
-        case 'u500pen':
-          totalPkgUnits = 1500;
-          proof = "("+totalInjML+" mL x 500 units/mL)";
-          totalUnits = totalInjML*500;
-          break;
-        case 'u500vial':
-          totalPkgUnits = 10000;
-          proof = "("+totalInjML+" mL x 500 units/mL)";
-          totalUnits = totalInjML*500;
-          break;
-      }
+      proof = "("+totalInsulinML+" mL x "+arrInsulinDrugs[insulinInput][9]+" units/mL)";
+      totalUnits = totalInsulinML*arrInsulinDrugs[insulinInput][9];
+      totalPkgUnits = arrInsulinDrugs[insulinInput][3]*arrInsulinDrugs[insulinInput][9];
       // Validate correct package size
-      switch (document.getElementById('injDrugs').value) {
-        case 'u100pen':
-        case 'u200pen':
-        case 'toujeomax':
-        case 'u500pen':
-          if (totalInjML % 3 > 0) {
-            validPkg = false;
-          }
-          break;
-        case 'u100vial':
-          if ((totalInjML % 3)*(totalInjML % 10) > 0) {
-            validPkg = false;
-          }
-          break;
-        case 'toujeo':
-          if (totalInjML % 1.5 > 0) {
-            validPkg = false;
-          }
-          break;
-        case 'u500vial':
-          if (totalInjML % 20 > 0) {
-            validPkg = false;
-          }
-          break;
+      if (totalInsulinML % arrInsulinDrugs[insulinInput][3] > 0) {
+        validPkg = false;
       }
-      let dailyUnits = document.getElementById('injIU').value;
       // Recalculate daily dose to include priming dose (pens only)
-      switch (document.getElementById('injDrugs').value) {
-        case 'u100pen':
-        case 'u200pen':
-          proof = proof+" / ("+dailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 2 priming units)) =";
-          dailyUnits = Number(dailyUnits)+(document.getElementById('injFreq').value*2);
-          notes = "Check room temperature stability of drug if over 28 days supply<br>Mixed insulins have shorter stability at 10-14 days supply per pen";
-          break;
-        case 'toujeo':
-          proof = proof+" / ("+dailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 3 priming units)) =";
-          dailyUnits = Number(dailyUnits)+(document.getElementById('injFreq').value*3);
-          break;
-        case 'toujeomax':
-          proof = proof+" / ("+dailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 4 priming units)) =";
-          dailyUnits = Number(dailyUnits)+(document.getElementById('injFreq').value*4);
-          break;
-        case 'u500pen':
-          proof = proof+" / ("+dailyUnits+" units + ("+document.getElementById('injFreq').value+" injections x 5 priming units)) =";
-          dailyUnits = Number(dailyUnits)+(document.getElementById('injFreq').value*5);
-          break;
-        case 'ozempic':
-          totalUnits = 169413001;
-          dailyUnits = 1;
-          break;
-        case 'liraglutide':
-          totalUnits = 169406012;
-          dailyUnits = 1;
-        default:
-          proof = proof+" / ("+dailyUnits+" units) ="
-          notes = "Check room temperature stability of drug if over 28 days supply";
-          break;
+      if (arrInsulinDrugs[insulinInput][2] == true) {
+        proof += " / ("+dailyUnits+" units + ("+document.getElementById('insulinFreq').value+" injections x "+arrInsulinDrugs[insulinInput][10]+" priming units)) =";
+        dailyUnits = Number(dailyUnits)+(document.getElementById('insulinFreq').value*arrInsulinDrugs[insulinInput][10]);
+      } else {
+        proof += " / ("+dailyUnits+" units) =";
       }
       // Calculate 30 day and 90 day vials/pens
       var monthlyPkg = Math.floor((dailyUnits*30)/totalPkgUnits);
       var quarterlyPkg = Math.floor((dailyUnits*90)/totalPkgUnits);
-      var monthlyML = (monthlyPkg * totalPkgUnits) / (totalUnits / totalInjML);
-      var quarterlyML = (quarterlyPkg * totalPkgUnits) / (totalUnits / totalInjML);
+      var monthlyML = (monthlyPkg * totalPkgUnits) / (totalUnits / totalInsulinML);
+      var quarterlyML = (quarterlyPkg * totalPkgUnits) / (totalUnits / totalInsulinML);
       var monthlyPkgDays = Math.floor(monthlyPkg*totalPkgUnits/dailyUnits);
       var quarterlyPkgDays = Math.floor(quarterlyPkg*totalPkgUnits/dailyUnits);
       // Validate inputs and calculate days supply
@@ -577,50 +302,41 @@ function calc() {
         document.getElementById('output').innerHTML = "Invalid input(s)";
       } else if (validPkg == false) {
         document.getElementById('output').innerHTML = "Invalid package size";
-      } else if (totalUnits == 169413001) {
-        document.getElementById('ozempic').style.display = 'block';
-      } else if (totalUnits == 169406012) {
-        document.getElementById('liraglutide').style.display = 'block';
-      }
-      else {
+      } else {
         output = Math.floor(totalUnits / dailyUnits);
         // Correct days supply based on product stability
-        switch (document.getElementById('injDrugs').value) {
-          case 'u500pen':
-            if (totalInjML/output < 3/28) {
-              output = "<del>"+output+" days supply</del> &rarr; "+totalInjML/3*28
-              notes = "Each pen only lasts for 28 days after first usage";
-            }
-            break;
-          case 'toujeo':
-            if (totalInjML/output < 1.5/56) {
-              output = "<del>"+output+" days supply</del> &rarr; "+totalInjML/1.5*56
-              notes = "Each pen only lasts for 56 days after first usage";
-            }
-            break;
-          case 'toujeomax':
-            if (totalInjML/output < 3/56) {
-              output = "<del>"+output+" days supply</del> &rarr; "+totalInjML/3*56
-              notes = "Each pen only lasts for 56 days after first usage";
-            }
-            break;
-          case 'u500vial':
-            if (totalInjML/output < 20/40) {
-              output = "<del>"+output+" days supply</del> &rarr; "+totalInjML/20*40
-              notes = "Each pen only lasts for 40 days after first usage";
-            }
-            break;
+        if (arrInsulinDrugs[insulinInput][11] > 0 && totalInsulinML/output < arrInsulinDrugs[insulinInput][3] / arrInsulinDrugs[insulinInput][11]) {
+          output = "<del>"+output+" days supply</del> &rarr; "+totalInsulinML/arrInsulinDrugs[insulinInput][3]*arrInsulinDrugs[insulinInput][11];
+          notes = "Each pen only lasts for "+arrInsulinDrugs[insulinInput][11]+" days after first usage";
         }
         // Add 30 and 90 day calculations if applicable
         if (monthlyPkg > 0 || quarterlyPkg > 0) {
-          notes = notes+"<br>"+"Nearest 30 day supply: "+monthlyPkg+" vials/pens ("+monthlyML+" mL = "+monthlyPkgDays+" days supply)";
-          notes = notes+"<br>"+"Nearest 90 day supply: "+quarterlyPkg+" vials/pens ("+quarterlyML+" mL = "+quarterlyPkgDays+" days supply)";
+          notes += "<br>"+"Nearest 30 day supply: "+monthlyPkg+" vials/pens ("+monthlyML+" mL = "+monthlyPkgDays+" days supply)";
+          notes += "<br>"+"Nearest 90 day supply: "+quarterlyPkg+" vials/pens ("+quarterlyML+" mL = "+quarterlyPkgDays+" days supply)";
         }
         // Display results
         document.getElementById('proof').innerHTML = proof;
         document.getElementById('output').innerHTML = output+" days supply";
         document.getElementById('notes').innerHTML = notes;
       }
+      break;
+    case 'Inj':
+      // Create HTML table from array
+      let injInput = document.getElementById('injDrugs').value;
+      let injTable = "<table>";
+      for (let i = 0; i < arrInjDrugs[injInput][2].length; i++) {
+        injTable += "<tr>";
+        for (j = 0; j < arrInjDrugs[injInput][2][i].length; j++) {
+          if (i == 0) {
+            injTable += "<th>"+arrInjDrugs[injInput][2][i][j]+"</th>";
+          } else {
+            injTable += "<td>"+arrInjDrugs[injInput][2][i][j]+"</td>";
+          }
+        }
+        injTable += "</tr>";
+      }
+      // Display results
+      document.getElementById('output').innerHTML = injTable;
       break;
   }
 }
