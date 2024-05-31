@@ -15,7 +15,8 @@
         <select id="route" name="route" onchange="onchangeRoute()">
           <option value="EyeEar">Ophthalmic/Otic</option>
           <option value="Nose">Intranasal</option>
-          <option value="Inj">Injection</option>
+          <option value="Insulin">Injection (insulin)</option>
+          <option value="Inj">Injection (non-insulin)</option>
           <option value="Device">Device</option>
           <option value="Kit">Kit</option>
         </select>
@@ -23,34 +24,7 @@
       <div id="ifEyeEar" style="display:block">
         <div>
           <label for="eyeEarDrugs">Select Ophthalmic/Otic Drug:</label>
-          <select id="eyeEarDrugs" name="eyeEarDrugs" onchange="onchangeEyeEar()">
-            <option value="other">Other</option>
-            <option value="alrex">ALREX 0.2% [loteprednol etabonate]</option>
-            <option value="atropine">atropine 1%</option>
-            <option value="bepreve">BEPREVE 1.5% [bepotastine]</option>
-            <option value="besivance">BESIVANCE 0.6% [besifloxacin]</option>
-            <option value="brimonidine">brimonidine 0.2%</option>
-            <option value="cyclopentolate">cyclopentolate 1%</option>
-            <option value="dexamethasone">dexamethasone 0.1%</option>
-            <option value="diclofenac">diclofenac sod 0.1%</option>
-            <option value="dorzolamide">dorzolamide sod 2%</option>
-            <option value="cosopt">COSOPT 2% / 0.5% [dorzolamide sod / timolol maleate]</option>
-            <option value="istalol">ISTALOL 0.5% [timolol maleate]</option>
-            <option value="levobunolol">levobunolol 0.5%</option>
-            <option value="lotemaxsusp">LOTEMAX 0.5% susp [loteprednol etabonate]</option>
-            <option value="lotemaxgel">LOTEMAX 0.5% gel (5 g) [loteprednol etabonate]</option>
-            <option value="lotemaxsm">LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]</option>
-            <option value="lumigan">LUMIGAN 0.01% [bimatoprost]</option>
-            <option value="miebo">MIEBO 1.3 GM/mL (3 mL) [perfluorohexyloctane]</option>
-            <option value="prolensa">PROLENSA 0.07% (3 mL) [bromfenac sodium]</option>
-            <option value="timoptic">TIMOPTIC [timolol maleate]</option>
-            <option value="timopticxe">TIMOPTIC XE (5 mL) [timolol maleate gel forming]</option>
-            <option value="vevye">VEVYE 0.1% (2 mL) [cyclosporine]</option>
-            <option value="vyzulta">VYZULTA 0.024% [latanoprostene bunod]</option>
-            <option value="xalatan">XALATAN 0.005% (2.5 mL) [latanoprost]</option>
-            <option value="zirgan">ZIRGAN 0.15% (5 g) [ganciclovir]</option>
-            <option value="zylet">ZYLET 0.5% / 0.3% [loteprednol etabonate / tobramycin]</option>
-          </select>
+          <select id="eyeEarDrugs" name="eyeEarDrugs" onchange="onchangeEyeEar()"></select>
         </div>
         <div id="ifEyeEarML" style="display:block">
           <label for="EyeEarML">Enter Package Size (mL):</label>
@@ -69,19 +43,7 @@
       <div id="ifNose" style="display:none">
         <div>
           <label for="noseDrugs">Select Intranasal Drug:</label>
-          <select id="noseDrugs" name="noseDrugs" onchange="onchangeNose()">
-            <option value="azelastine">azelastine 0.1% (30 mL)</option>
-            <option value="butorphanol">butorphanol 10 mg/mL (2.5 mL)</option>
-            <option value="calcitonin">calcitonin salmon 220 USP (3.7 mL)</option>
-            <option value="desmopressin">desmopressin 0.01% (5 mL)</option>
-            <option value="dymista">DYMISTA 137 mcg / 50 mcg (23 g) [azelastine / fluticasone]</option>
-            <option value="flut50">FLONASE 50 mcg (16g) [fluticasone]</option>
-            <option value="ipra3">ipratropium 0.03% (30 mL)</option>
-            <option value="ipra6">ipratropium 0.06% (15 mL)</option>
-            <option value="ryaltris">RYALTRIS 665 mcg / 25 mcg (29 g) [olopatadine / mometasone]</option>
-            <option value="omnaris">OMNARIS 50 mcg (12.5 g) [ciclesonide]</option>
-            <option value="zetonna">ZETONNA 37 mcg (6.1 g) [ciclesonide]</option>
-          </select>
+          <select id="noseDrugs" name="noseDrugs" onchange="onchangeNose()"></select>
         </div>
         <div>
           <label for="NosePkg">Enter # of Packages:</label>
@@ -93,39 +55,33 @@
         </div>
         <span>Note: Account for <u>one or both nostrils</u> in total sprays per day</span>
       </div>
-      <div id="ifInj" style="display:none">
+      <div id="ifInsulin" style="display:none">
         <div>
-          <label for="injDrugs">Select Injectable Drug:</label>
-          <select id="injDrugs" name="injDrugs" onchange="onchangeInj()">
-            <option value="u100pen">U-100 insulin PEN (3 mL)</option>
-            <option value="u100vial">U-100 insulin VIAL (3 mL or 10 mL)</option>
-            <option value="u200pen">U-200 insulin PEN (3 mL)</option>
-            <option value="toujeo">U-300 TOUJEO PEN (1.5 mL) [insulin glargine]</option>
-            <option value="toujeomax">U-300 TOUJEO MAX PEN (3 mL) [insulin glargine]</option>
-            <option value="u500pen">U-500 HUMULIN R PEN (3 mL) [insulin human]</option>
-            <option value="u500vial">U-500 HUMULIN R VIAL (20 mL) [insulin human]</option>
-            <option value="ozempic">OZEMPIC (3 mL) [semaglutide]</option>
-            <option value="liraglutide">VICTOZA or SAXENDA (3 mL) [liraglutide]</option>
-          </select>
+          <label for="insulinDrugs">Select Injectable Drug:</label>
+          <select id="insulinDrugs" name="insulinDrugs" onchange="onchangeInsulin()"></select>
         </div>
         <div id="insulin" style="display:block">
           <div>
-            <label for="injML">Enter Package Size (mL):</label>
-            <input type="number" id="injML" name="injML" min="3" step="3" value="3" oninput="calcPens()">
+            <label for="insulinML">Enter Package Size (mL):</label>
+            <input type="number" id="insulinML" name="insulinML" min="3" step="3" value="3" oninput="calcPkg()">
           </div>
           <div>
-            <label for="injIU">Enter Total Units per Day:</label>
-            <input type="number" id="injIU" name="injIU" min="1" step="0.5" value="10">
+            <label for="insulinIU">Enter Total Units per Day:</label>
+            <input type="number" id="insulinIU" name="insulinIU" min="1" step="0.5" value="10">
           </div>
         </div>
         <div id="insulinPen" style="display:block">
           <div>
-            <label for="injFreq">Enter # of Injections per Day:</label>
-            <input type="number" id="injFreq" name="injFreq" min="1" value="1">
+            <label for="insulinFreq">Enter # of Injections per Day:</label>
+            <input type="number" id="insulinFreq" name="insulinFreq" min="1" value="1">
           </div>
           <span>Note: Exclude priming doses from total units per day</span>
-          <p id="numPens"></p>
         </div>
+        <p id="numPkg"></p>
+      </div>
+      <div id="ifInj" style="display:none">
+        <label for="injDrugs">Select Injectable Drug:</label>
+        <select id="injDrugs" name="injDrugs"></select>
       </div>
       <input type="button" value="Calculate" onclick="calc()">
     </form>
@@ -135,74 +91,6 @@
       <p id="proof" class="result"></p>
       <p id="output" class="result"></p>
       <p id="notes" class="result"></p>
-      <div id="ozempic" style="display:none">
-        <table>
-          <tr>
-            <th>Strength</th>
-            <th>Directions</th>
-            <th>Days Supply</th>
-          </tr>
-          <tr>
-            <td>0.25 mg or 0.5 mg</td>
-            <td>Inject 0.25 mg once weekly</td>
-            <td>56 days</td>
-          </tr>
-          <tr>
-            <td>0.25 mg or 0.5 mg</td>
-            <td>Inject 0.25 mg once weekly for 4 weeks, 0.5 mg once weekly for 2 weeks</td>
-            <td>42 days supply</td>
-          </tr>
-          <tr>
-            <td>0.25 mg or 0.5 mg</td>
-            <td>Inject 0.5 mg once weekly</td>
-            <td>28 days supply</td>
-          </tr>
-          <tr>
-            <td>1 mg</td>
-            <td>Inject 1 mg once weekly</td>
-            <td>28 days supply</td>
-          </tr>
-          <tr>
-            <td>2 mg</td>
-            <td>Inject 2 mg once weekly</td>
-            <td>28 days supply</td>
-          </tr>
-        </table>
-      </div>
-      <div id="liraglutide" style="display:none">
-        <table>
-          <tr>
-            <th>Product</th>
-            <th>Directions</th>
-            <th>Quantity</th>
-            <th>Days Supply</th>
-          </tr>
-          <tr>
-            <td>VICTOZA</td>
-            <td>Inject 1.2 mg daily</td>
-            <td>6 mL (2 pens)</td>
-            <td>30 days</td>
-          </tr>
-          <tr>
-            <td>VICTOZA</td>
-            <td>Inject 1.8 mg daily</td>
-            <td>9 mL (3 pens)</td>
-            <td>30 days</td>
-          </tr>
-          <tr>
-            <td>SAXENDA</td>
-            <td>Inject 0.6 mg daily for 1 week, 1.2 mg daily for 1 week, 1.8 mg daily for 1 week, 2.4 mg daily for 1 week, 3 mg daily</td>
-            <td>9 mL (3 pens)</td>
-            <td>32 days</td>
-          </tr>
-          <tr>
-            <td>SAXENDA</td>
-            <td>Inject 3 mg daily</td>
-            <td>15 mL (5 pens)</td>
-            <td>30 days</td>
-          </tr>
-        </table>
-      </div>
       <div id="ifDevice" style="display:none">
         <table>
           <tr>
