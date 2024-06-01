@@ -34,9 +34,11 @@ const arrNoseDrugs = [
   ['calcitonin','calcitonin salmon 220 USP (3.7 mL)',1,30],
   ['desmopressin','desmopressin 0.01% (5 mL)',2,50],
   ['dymista','DYMISTA 137 mcg / 50 mcg (23 g) [azelastine / fluticasone]',4,120],
-  ['flut50','FLONASE 50 mcg (16g) [fluticasone]',4,120],
+  ['flut50','FLONASE 50 mcg (16 g) [fluticasone]',4,120],
   ['ipra3','ipratropium 0.03% (30 mL)',12,345],
   ['ipra6','ipratropium 0.06% (15 mL)',12,165],
+  ['qnasl40','QNASL 40 mcg (6.8 g) [beclomethasone]',2,60],
+  ['qnasl80','QNASL 80 mcg (10.6 g) [beclomethasone]',4,120],
   ['ryaltris','RYALTRIS 665 mcg / 25 mcg (29 g) [olopatadine / mometasone]',8,240],
   ['omnaris','OMNARIS 50 mcg (12.5 g) [ciclesonide]',4,120],
   ['zetonna','ZETONNA 37 mcg (6.1 g) [ciclesonide]',2,60]
