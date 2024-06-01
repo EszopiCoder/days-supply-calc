@@ -31,6 +31,7 @@ This web-based calculator is deployed via GitHub pages and can be accessed from 
 |  | bromfenac 0.07% (3 mL) | Ophthalmic | # mL x 21 | 0 | # drops | Bausch & Lomb (generic) | Account for one or both eyes in total drops per day |
 | TIMOPTIC | timolol maleate | Ophthalmic | # mL x 32 | 0 | # drops | Bausch & Lomb (brand/generic) | Account for one or both eyes in total drops per day |
 | TIMOPTIC XE (5 mL) | timolol maleate gel forming | Ophthalmic | # mL x 29 | 0 | # drops | Bausch & Lomb (brand/generic) | Account for one or both eyes in total drops per day |
+| VEVYE 0.1% (2 mL) | cyclosporine | Ophthalmic | # mL x 100 | 0 | # drops | Harrow Eye | Account for one or both eyes in total drops per day |
 | VYZULTA 0.024% | latanoprostene bunod | Ophthalmic | # mL x 32 | 0 | # drops | Bausch & Lomb (brand) | Account for one or both eyes in total drops per day. Expires 56 days after opening |
 | XALATAN 0.005% (2.5 mL) | latanoprost | Ophthalmic | # mL x 33 | 0 | # drops | Pfizer (brand) | Account for one or both eyes in total drops per day. Expires 42 days after opening |
 | XALATAN 0.005% | latanoprost | Ophthalmic | # mL x 36 | 0 | # drops | Bausch & Lomb (generic) | Account for one or both eyes in total drops per day. Expires 42 days after opening |
@@ -47,6 +48,8 @@ This web-based calculator is deployed via GitHub pages and can be accessed from 
 | FLONASE 50 mcg (16) | fluticasone propionate | Intranasal | 120 per package | 0 | # sprays |  | Account for one or both nostrils in total sprays per day |
 |  | ipratropium 0.03% (30 mL) | Intranasal | 345 per package | 0 | # sprays |  | Account for one or both nostrils in total sprays per day |
 |  | ipratropium 0.06% (15 mL) | Intranasal | 165 per package  | 0 | # sprays |  | Account for one or both nostrils in total sprays per day |
+| QNASL 40 mcg (6.8 g) | beclomethasone | Intranasal | 60 per package | 0 | # sprays |  | Account for one or both nostrils in total sprays per day |
+| QNASL 80 mcg (10.6 g) | beclomethasone | Intranasal | 120 per package | 0 | # sprays |  | Account for one or both nostrils in total sprays per day |
 | RYALTRIS 665 mcg / 25 mcg (29 g) | olopatadine / mometasone | Intranasal | 240 per package | 0 | # sprays |  | Account for one or both nostrils in total sprays per day |
 | OMNARIS 50 mcg (12.5 g) | ciclesonide | Intranasal | 120 per package | 0 | # sprays |  | Account for one or both nostrils in total sprays per day |
 | ZETONNA 37 mcg (6.1 g) | ciclesonide | Intranasal | 60 per package | 0 | # sprays |  | Account for one or both nostrils in total sprays per day |
@@ -60,7 +63,7 @@ This web-based calculator is deployed via GitHub pages and can be accessed from 
 | OZEMPIC 0.25mg or 0.5mg (3 mL) | semaglutide | Injection | 8 (0.25 mg) per package | 0 | # mg |  | 28, 42, or 56 days supply depending on dosing |
 | OZEMPIC 1mg/2mg (3 mL) | semaglutide | Injection | 4 per package | 0 | # mg |  | 28 days supply |
 
-Last updated 05/2024
+Last updated 06/2024
 ## Days Supply Calculations for Devices
 | Device Name | Package Size | Days Supply | Change Frequency |
 | --- | --- | --- | --- |
