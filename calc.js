@@ -167,8 +167,8 @@ function onchangeEyeEar() {
  */
 function onchangeNose() {
   const noseInput = document.getElementById('noseDrugs').value;
-  const dailySprays = document.getElementById('NoseSpray').value;
-  dailySprays = arrNoseDrugs[noseInput][2];
+  const dailySprays = document.getElementById('NoseSpray');
+  dailySprays.value = arrNoseDrugs[noseInput][2];
 }
 /**
  * Shows/Hides user inputs for each injection drug.
