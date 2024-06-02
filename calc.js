@@ -270,7 +270,7 @@ function calc() {
       proof = "("+totalNosePkg+" pkg x "+arrNoseDrugs[noseInput][3]+" sprays/pkg)";
       totalSprays = totalNosePkg*arrNoseDrugs[noseInput][3];
       // Validate inputs and calculate days supply
-      if (isNaN(totalSprays) || totalSprays < 1) {
+      if (isNaN(totalSprays) || totalSprays < 1 || isNaN(dailySprays) || dailySprays < 1) {
         document.getElementById('output').innerHTML = "Invalid input(s)"
       } else {
         output = Math.floor(totalSprays / dailySprays);
@@ -318,7 +318,7 @@ function calc() {
         // Correct days supply based on product stability
         if (arrInsulinDrugs[insulinInput][11] > 0 && totalInsulinML/output < arrInsulinDrugs[insulinInput][3] / arrInsulinDrugs[insulinInput][11]) {
           output = "<del>"+output+" days supply</del> &rarr; "+totalInsulinML/arrInsulinDrugs[insulinInput][3]*arrInsulinDrugs[insulinInput][11];
-          notes = "Each pen only lasts for "+arrInsulinDrugs[insulinInput][11]+" days after first usage";
+          notes = "Each vial/pen only lasts for "+arrInsulinDrugs[insulinInput][11]+" days after first usage";
         }
         // Add 30 and 90 day calculations if applicable
         if (monthlyPkg > 0 || quarterlyPkg > 0) {
