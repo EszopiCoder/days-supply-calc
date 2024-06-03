@@ -101,10 +101,18 @@ function addDrugs() {
     document.getElementById('injDrugs').append(injDrugs);
   }
 }
-// Run calc() function if enter button is pressed
-document.addEventListener('keyup', (e) => {
-  if (e.code == 'Enter') {
+/**
+ * Run calc() function if enter button is pressed
+ * Run copyText() function if Ctrl+C is pressed
+ */
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Enter') {
     calc();
+  }
+  // event.metaKey - pressed Command key on Macs
+  // event.ctrlKey - pressed Control key on Linux or Windows
+  if ((e.metaKey || e.ctrlKey) && e.code === 'KeyC') {
+    copyText();
   }
 })
 /**
@@ -112,9 +120,9 @@ document.addEventListener('keyup', (e) => {
  * Triggered by onchange event.
  */
 function onchangeRoute() {
-  document.getElementById('proof').innerHTML = "";
-  document.getElementById('output').innerHTML = "";
-  document.getElementById('notes').innerHTML = "";
+  document.getElementById('proof').innerHTML = '';
+  document.getElementById('output').innerHTML = '';
+  document.getElementById('notes').innerHTML = '';
   document.getElementById('ifEyeEar').style.display = 'none';
   document.getElementById('ifNose').style.display = 'none';
   document.getElementById('ifInsulin').style.display = 'none';
@@ -130,6 +138,7 @@ function onchangeRoute() {
     document.getElementById('ifInsulin').style.display = 'block';
   } else if (routeInput.value == 'Inj') {
     document.getElementById('ifInj').style.display = 'block';
+    calc();
   } else if (routeInput.value == 'Device') {
     document.getElementById('ifDevice').style.display = 'block';
   } else if (routeInput.value == 'Kit') {
@@ -171,7 +180,7 @@ function onchangeNose() {
   dailySprays.value = arrNoseDrugs[noseInput][2];
 }
 /**
- * Shows/Hides user inputs for each injection drug.
+ * Shows/Hides user inputs for each insulin drug.
  * Also changes settings for insulinML and insulinIU number inputs.
  * Triggered by onchange event.
  */
@@ -197,7 +206,14 @@ function onchangeInsulin() {
   calcPkg();
 }
 /**
- * Calculates the number of pens and outputs via innerHTML to 'numPkg'.
+ * Shows info for each injection drug.
+ * Triggered by onchange event.
+ */
+function onchangeInj() {
+  calc();
+}
+/**
+ * Calculates the number of vials/pens and outputs via innerHTML to 'numPkg'.
  * Triggered by onchange event.
  */
 function calcPkg() {
@@ -218,7 +234,7 @@ function calcPkg() {
  * Triggered by onclick event.
  */
 function calc() {
-  document.getElementById('proof').innerHTML='';
+  document.getElementById('proof').innerHTML = '';
   document.getElementById('output').innerHTML = '';
   document.getElementById('notes').innerHTML = '';
   let proof = '';
@@ -274,7 +290,7 @@ function calc() {
         document.getElementById('output').innerHTML = "Invalid input(s)"
       } else {
         output = Math.floor(totalSprays / dailySprays);
-        proof += " / "+dailySprays+" sprays per day = ";
+        proof += " / "+dailySprays+" sprays per day =";
         document.getElementById('proof').innerHTML = proof;
         document.getElementById('output').innerHTML = output+" days supply";
       }
