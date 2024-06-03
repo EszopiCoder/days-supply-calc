@@ -346,6 +346,7 @@ function calc() {
         }
         injTable += "</tr>";
       }
+      injTable += "</table>";
       // Display results
       document.getElementById('output').innerHTML = injTable;
       break;
