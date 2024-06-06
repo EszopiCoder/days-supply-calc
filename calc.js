@@ -61,7 +61,8 @@ const arrInsulinDrugs = [
   ['novolinvial','U-100 NOVOLIN N, R, or 70/30 VIAL (10 mL) [insulin human]',false,10,10,10,1,1,1,100,0,42],
   ['novologmixpen','U-100 NOVOLIN 70/30 PEN (3 mL) [insulin aspart protamine mix]',true,3,3,3,1,1,1,100,2,14],
   ['tresiba100pen','U-100 TRESIBA PEN (3 mL) [insulin degludec]',true,3,3,3,1,1,1,100,2,56],
-  ['tresiba200pen','U-200 TRESIBA PEN (3 mL) [insulin degludec]',true,3,3,3,1,1,1,200,2,56]
+  ['tresiba200pen','U-200 TRESIBA PEN (3 mL) [insulin degludec]',true,3,3,3,1,1,1,200,2,56],
+  ['xultophy','U-100 XULTOPHY 100 / 3.6 PEN (3 mL) [insulin degludec / liraglutide]',true,3,3,3,1,1,1,100,0,21]
 ];
 // [abbreviated drug name (string), drug name (string), [[table header],[table row],...]]
 const arrInjDrugs = [
