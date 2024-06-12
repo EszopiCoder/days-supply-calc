@@ -15,9 +15,9 @@ const arrEyeEarDrugs = [
   ['levobunolol','levobunolol 0.5%',false,5,5,5,2,32,['Bausch & Lomb generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
   ['lotemaxsusp','LOTEMAX 0.5% susp [loteprednol etabonate]',false,5,5,5,4,31,['Bausch & Lomb brand','(NDC: 24208)',[['Other generics:',20]]]],
   ['lotemaxgel','LOTEMAX 0.5% gel (5 g) [loteprednol etabonate]',false,5,5,5,4,25,['Bausch & Lomb brand/generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
-  ['lotemaxsm','LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]',true,1,0.5,5,3,131],
+  ['lotemaxsm','LOTEMAX SM 0.38% gel (5 g) [loteprednol etabonate]',true,5,5,5,3,131],
   ['lumigan','LUMIGAN 0.01% [bimatoprost]',false,2.5,2.5,2.5,2,24,['Allergan brand','(NDC: 00023)',[['Other generics:',20]]]],
-  ['miebo','MIEBO 1.3 GM/mL (3 mL) [perfluorohexyloctane]',true,1,0.5,5,8,272],
+  ['miebo','MIEBO 1.3 GM/mL (3 mL) [perfluorohexyloctane]',true,5,5,5,8,272],
   ['prolensa','PROLENSA 0.07% (3 mL) [bromfenac sodium]',false,3,3,3,1,19,['Bausch & Lomb brand','(NDC: 24208)',[['Bausch & Lomb generic (NDC: 82260):',21],['Other generics:',20]]]],
   ['timoptic','TIMOPTIC [timolol maleate]',false,5,5,5,4,32,['Bausch & Lomb brand/generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
   ['timopticxe','TIMOPTIC XE (5 mL) [timolol maleate gel forming]',false,5,5,5,2,29,['Bausch & Lomb brand/generic','(NDC: 24208 or 82260)',[['Other generics:',20]]]],
@@ -45,7 +45,7 @@ const arrNoseDrugs = [
 ];
 // [abbreviated drug name (string), drug name (string), pen, mL min, mL step, mL value, units min, units step, units value, insulin concentration, priming units, expiration]
 const arrInsulinDrugs = [
-  ['u100pen','U-100 insulin PEN (3 mL)',true,3,3,3,1,0.5,0.5,100,2,28],
+  ['u100pen','U-100 insulin PEN (3 mL)',true,3,3,3,1,0.5,1,100,2,28],
   ['u100vial3','U-100 insulin VIAL (3 mL)',false,3,3,3,1,1,1,100,0,28],
   ['u100vial','U-100 insulin VIAL (10 mL)',false,10,10,10,1,1,1,100,0,28],
   ['u200pen','U-200 insulin PEN (3 mL)',true,3,3,3,1,1,1,200,2,28],
@@ -54,14 +54,17 @@ const arrInsulinDrugs = [
   ['u500pen','U-500 HUMULIN R PEN (3 mL) [insulin human]',true,3,3,3,5,5,5,500,5,28],
   ['u500vial','U-500 HUMULIN R VIAL (20 mL) [insulin human]',false,20,20,20,5,5,5,500,0,40],
   ['humalogmix','U-100 HUMALOG 50/50 or 75/25 MIX PEN (3 mL) [insulin lispro protamine mix]',true,3,3,3,1,1,1,100,2,10],
-  ['humulinvial','U-100 HUMULIN N, R, or 70/30 VIAL (3 mL) [insulin human]',false,3,3,3,1,1,1,100,0,31],
+  ['humulinvial3','U-100 HUMULIN N, R, or 70/30 VIAL (3 mL) [insulin human]',false,3,3,3,1,1,1,100,0,31],
   ['humulinvial','U-100 HUMULIN N, R, or 70/30 VIAL (10 mL) [insulin human]',false,10,10,10,1,1,1,100,0,31],
   ['humulinnpen','U-100 HUMULIN N PEN (3 mL) [isophane insulin human]',true,3,3,3,1,1,1,100,2,14],
   ['humulinmixpen','U-100 HUMULIN 70/30 PEN (3 mL) [isophane insulin human mix]',true,3,3,3,1,1,1,100,2,10],
   ['novolinvial','U-100 NOVOLIN N, R, or 70/30 VIAL (10 mL) [insulin human]',false,10,10,10,1,1,1,100,0,42],
   ['novologmixpen','U-100 NOVOLIN 70/30 PEN (3 mL) [insulin aspart protamine mix]',true,3,3,3,1,1,1,100,2,14],
+  ['tresiba100vial','U-100 TRESIBA VIAL (10 mL) [insulin degludec]',false,10,10,10,1,1,1,100,0,56],
   ['tresiba100pen','U-100 TRESIBA PEN (3 mL) [insulin degludec]',true,3,3,3,1,1,1,100,2,56],
   ['tresiba200pen','U-200 TRESIBA PEN (3 mL) [insulin degludec]',true,3,3,3,1,1,1,200,2,56],
+  ['levemirvial','U-100 LEVEMIR VIAL (10 mL) [insulin detemir]',false,10,10,10,1,1,1,100,0,42],
+  ['levemirpen','U-100 LEVEMIR PEN (3 mL) [insulin detemir]',true,3,3,3,1,1,1,100,2,42],
   ['xultophy','U-100 XULTOPHY 100 / 3.6 PEN (3 mL) [insulin degludec / liraglutide]',true,3,3,3,1,1,1,100,0,21]
 ];
 // [abbreviated drug name (string), drug name (string), [[table header],[table row],...]]
@@ -121,9 +124,7 @@ document.addEventListener('keydown', (e) => {
  * Triggered by onchange event.
  */
 function onchangeRoute() {
-  document.getElementById('proof').innerHTML = '';
-  document.getElementById('output').innerHTML = '';
-  document.getElementById('notes').innerHTML = '';
+  clearResult();
   document.getElementById('ifEyeEar').style.display = 'none';
   document.getElementById('ifNose').style.display = 'none';
   document.getElementById('ifInsulin').style.display = 'none';
@@ -133,10 +134,13 @@ function onchangeRoute() {
   const routeInput = document.getElementById('route');
   if (routeInput.value == 'EyeEar') {
     document.getElementById('ifEyeEar').style.display = 'block';
+    onchangeEyeEar();
   } else if (routeInput.value == 'Nose') {
     document.getElementById('ifNose').style.display = 'block';
+    onchangeNose();
   } else if (routeInput.value == 'Insulin') {
     document.getElementById('ifInsulin').style.display = 'block';
+    onchangeInsulin();
   } else if (routeInput.value == 'Inj') {
     document.getElementById('ifInj').style.display = 'block';
     calc();
@@ -152,6 +156,7 @@ function onchangeRoute() {
  * Triggered by onchange event.
  */
 function onchangeEyeEar() {
+  clearResult();
   const eyeEarInput = document.getElementById('eyeEarDrugs').value;
   const totalML = document.getElementById('EyeEarML');
   const dailyDrops = document.getElementById('EyeEarGtt');
@@ -176,6 +181,7 @@ function onchangeEyeEar() {
  * Triggered by onchange event.
  */
 function onchangeNose() {
+  clearResult();
   const noseInput = document.getElementById('noseDrugs').value;
   const dailySprays = document.getElementById('NoseSpray');
   dailySprays.value = arrNoseDrugs[noseInput][2];
@@ -218,6 +224,7 @@ function onchangeInj() {
  * Triggered by onchange event.
  */
 function calcPkg() {
+  clearResult();
   const totalML = document.getElementById('insulinML');
   const insulinInput = document.getElementById('insulinDrugs').value;
   if (isNaN(totalML.value) || totalML.value == 0) {
@@ -235,9 +242,7 @@ function calcPkg() {
  * Triggered by onclick event.
  */
 function calc() {
-  document.getElementById('proof').innerHTML = '';
-  document.getElementById('output').innerHTML = '';
-  document.getElementById('notes').innerHTML = '';
+  clearResult();
   let proof = '';
   let output = '';
   let notes = '';
@@ -386,4 +391,12 @@ function copyText() {
       document.getElementById('copyAlert').style.display = 'none';
     }, 2000);
   }
+}
+/**
+ * Clears results.
+ */
+function clearResult() {
+  document.getElementById('proof').innerHTML = "";
+  document.getElementById('output').innerHTML = "";
+  document.getElementById('notes').innerHTML = "";
 }
